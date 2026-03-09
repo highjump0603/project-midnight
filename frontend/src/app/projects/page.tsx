@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getProjects } from "@/lib/api";
 import ProjectGrid from "@/components/projects/ProjectGrid";
 import SectionHeading from "@/components/ui/SectionHeading";
+import type { Project } from "@/types/project";
 
 export const metadata: Metadata = {
   title: "Projects",
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
 export const revalidate = 3600;
 
 export default async function ProjectsPage() {
-  let projects = [];
+  let projects: Project[] = [];
   try {
     const res = await getProjects({ limit: 50 });
     projects = res.items;

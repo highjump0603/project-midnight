@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getBlogPosts } from "@/lib/api";
 import BlogList from "@/components/blog/BlogList";
 import SectionHeading from "@/components/ui/SectionHeading";
+import type { BlogPost } from "@/types/blog";
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
 export const revalidate = 1800;
 
 export default async function BlogPage() {
-  let posts = [];
+  let posts: BlogPost[] = [];
   try {
     const res = await getBlogPosts({ limit: 50 });
     posts = res.items;
