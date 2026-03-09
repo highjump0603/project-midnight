@@ -1,0 +1,10 @@
+# 모든 텍스트 파일 — LF로 통일 (서버/Mac/Windows 호환)
+* text=auto eol=lf
+
+# 바이너리
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.ico binary
+*.woff binary
+*.woff2 binary

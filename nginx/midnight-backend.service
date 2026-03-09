@@ -1,0 +1,17 @@
+[Unit]
+Description=Project Midnight FastAPI Backend
+After=network.target postgresql.service
+
+[Service]
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/var/www/project-midnight/backend
+ExecStart=/var/www/project-midnight/backend/venv/bin/uvicorn app.main:app --host 127.0.0.1 --port 8000 --workers 2
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=midnight-backend
+
+[Install]
+WantedBy=multi-user.target
