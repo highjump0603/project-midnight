@@ -1,8 +1,8 @@
 import uuid
 from datetime import datetime
-from sqlalchemy import String, Text, Boolean, Integer, ARRAY, func
+from sqlalchemy import String, Text, Boolean, Integer, ARRAY, func, TIMESTAMP
 from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy.dialects.postgresql import UUID, TIMESTAMPTZ
+from sqlalchemy.dialects.postgresql import UUID
 from app.database import Base
 
 
@@ -20,7 +20,7 @@ class BlogPost(Base):
     tags: Mapped[list[str]] = mapped_column(ARRAY(String), nullable=False, default=list)
     reading_time: Mapped[int] = mapped_column(Integer, nullable=False, default=1)
     is_published: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False, index=True)
-    published_at: Mapped[datetime | None] = mapped_column(TIMESTAMPTZ, nullable=True)
+    published_at: Mapped[datetime | None] = mapped_column(TIMESTAMP(timezone=True), nullable=True)
     created_at: Mapped[datetime] = mapped_column(
         nullable=False, server_default=func.now()
     )
