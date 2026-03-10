@@ -35,7 +35,7 @@ npm run build
 echo "✓ Frontend built"
 
 # 프론트엔드 재시작 (PM2)
-pm2 restart project-midnight-frontend || pm2 start ecosystem.config.js
+pm2 restart midnight-frontend
 pm2 save
 echo "✓ Frontend restarted"
 
