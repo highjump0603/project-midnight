@@ -3,9 +3,10 @@ import { ArrowRight } from "lucide-react";
 import { getProjects } from "@/lib/api";
 import ProjectGrid from "@/components/projects/ProjectGrid";
 import SectionHeading from "@/components/ui/SectionHeading";
+import type { Project } from "@/types/project";
 
 export default async function FeaturedProjects() {
-  let projects = [];
+  let projects: Project[] = [];
   try {
     const res = await getProjects({ featured: true, limit: 3 });
     projects = res.items;

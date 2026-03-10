@@ -3,9 +3,10 @@ import { ArrowRight } from "lucide-react";
 import { getBlogPosts } from "@/lib/api";
 import BlogList from "@/components/blog/BlogList";
 import SectionHeading from "@/components/ui/SectionHeading";
+import type { BlogPost } from "@/types/blog";
 
 export default async function LatestPosts() {
-  let posts = [];
+  let posts: BlogPost[] = [];
   try {
     const res = await getBlogPosts({ limit: 4 });
     posts = res.items;
