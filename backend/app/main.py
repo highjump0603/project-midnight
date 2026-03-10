@@ -21,7 +21,7 @@ app = FastAPI(
     title="Project Midnight API",
     description="Backend API for project-midnight.dev portfolio",
     version="1.0.0",
-    docs_url="/docs" if settings.app_debug or settings.app_env == "development" else None,
+    docs_url="/api/docs",
     redoc_url=None,
     lifespan=lifespan,
 )
