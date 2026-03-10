@@ -88,13 +88,13 @@ export async function adminDeleteProject(slug: string) {
 // ── Blog ─────────────────────────────────────────────────────────────────────
 
 export async function adminGetPosts() {
-  const res = await fetch(`${API}/blog?limit=100`, { headers: authHeaders() });
+  const res = await fetch(`${API}/blog/admin/posts?limit=100`, { headers: authHeaders() });
   if (!res.ok) throw new Error("Failed to fetch posts");
   return res.json();
 }
 
 export async function adminGetPost(slug: string) {
-  const res = await fetch(`${API}/blog/${slug}`, { headers: authHeaders() });
+  const res = await fetch(`${API}/blog/admin/posts/${slug}`, { headers: authHeaders() });
   if (!res.ok) throw new Error("Not found");
   return res.json();
 }

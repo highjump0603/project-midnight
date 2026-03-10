@@ -22,6 +22,7 @@ app = FastAPI(
     description="Backend API for project-midnight.dev portfolio",
     version="1.0.0",
     docs_url="/api/docs",
+    openapi_url="/api/openapi.json",
     redoc_url=None,
     lifespan=lifespan,
 )

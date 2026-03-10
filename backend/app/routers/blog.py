@@ -47,6 +47,40 @@ async def get_post(slug: str, db: AsyncSession = Depends(get_db)):
     return post
 
 
+@router.get("/admin/posts", response_model=BlogPostListOut)
+async def admin_list_posts(
+    tag: Optional[str] = None,
+    limit: int = 20,
+    offset: int = 0,
+    db: AsyncSession = Depends(get_db),
+    _: str = Depends(get_current_admin),
+):
+    query = select(BlogPost).order_by(BlogPost.created_at.desc())
+    count_query = select(func.count(BlogPost.id))
+
+    if tag:
+        query = query.where(BlogPost.tags.any(tag))
+        count_query = count_query.where(BlogPost.tags.any(tag))
+
+    total = (await db.execute(count_query)).scalar_one()
+    items = (await db.execute(query.limit(limit).offset(offset))).scalars().all()
+
+    return BlogPostListOut(items=items, total=total, limit=limit, offset=offset)
+
+
+@router.get("/admin/posts/{slug}", response_model=BlogPostOut)
+async def admin_get_post(
+    slug: str,
+    db: AsyncSession = Depends(get_db),
+    _: str = Depends(get_current_admin),
+):
+    result = await db.execute(select(BlogPost).where(BlogPost.slug == slug))
+    post = result.scalar_one_or_none()
+    if not post:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Post not found")
+    return post
+
+
 @router.post("", response_model=BlogPostOut, status_code=status.HTTP_201_CREATED)
 async def create_post(
     data: BlogPostCreate,
