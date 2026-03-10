@@ -17,5 +17,4 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            bash /var/www/project-midnight/deploy.sh 2>&1 | tee /tmp/deploy.log
-            echo "Exit code: $?"
+            bash /var/www/project-midnight/deploy.sh
