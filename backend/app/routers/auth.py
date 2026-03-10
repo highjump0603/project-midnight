@@ -1,14 +1,13 @@
 from datetime import datetime, timedelta, timezone
 from fastapi import APIRouter, HTTPException, status, Depends
 from fastapi.security import OAuth2PasswordRequestForm
+import bcrypt
 from jose import jwt
-from passlib.context import CryptContext
 from pydantic import BaseModel
 from app.config import settings
 from app.dependencies import get_current_admin
 
 router = APIRouter(prefix="/api/auth", tags=["auth"])
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
 class Token(BaseModel):
@@ -31,7 +30,7 @@ async def login(form: OAuth2PasswordRequestForm = Depends()):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid credentials")
     if not settings.admin_password_hash:
         raise HTTPException(status_code=status.HTTP_503_SERVICE_UNAVAILABLE, detail="Admin not configured")
-    if not pwd_context.verify(form.password, settings.admin_password_hash):
+    if not bcrypt.checkpw(form.password.encode(), settings.admin_password_hash.encode()):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid credentials")
     return Token(access_token=create_access_token(form.username), token_type="bearer")
 
