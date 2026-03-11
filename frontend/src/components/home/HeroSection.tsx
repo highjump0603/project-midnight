@@ -77,7 +77,7 @@ export default function HeroSection() {
           transition={{ delay: 1.2, duration: 0.5 }}
           className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
         >
-          <span className="font-mono text-xs text-silver-400">스크롤</span>
+          <span className="font-mono text-xs text-silver-400">Scroll</span>
           <div className="w-px h-12 bg-gradient-to-b from-silver-400/50 to-transparent animate-[fade-in-up_2s_ease-in-out_infinite]" />
         </motion.div>
       </div>
