@@ -13,6 +13,21 @@ export const metadata: Metadata = {
     default: SITE_NAME,
     template: `%s | ${SITE_NAME}`,
   },
+  icons: {
+    icon: [
+      {
+        url: "/icons/favicon.png",
+        type: "image/png",
+      },
+    ],
+    shortcut: ["/icons/favicon.png"],
+    apple: [
+      {
+        url: "/icons/apple-touch-icon.png",
+        type: "image/png",
+      },
+    ],
+  },
   ...createMetadata({
     description:
       "Software developer portfolio focused on full stack projects, engineering notes, and things built after midnight.",

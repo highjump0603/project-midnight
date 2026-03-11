@@ -8,6 +8,11 @@ import TechBadge from "@/components/projects/TechBadge";
 import { createMetadata } from "@/lib/seo";
 
 export const revalidate = 3600;
+export const dynamicParams = true;
+
+type ProjectPageProps = {
+  params: Promise<{ slug: string }>;
+};
 
 export async function generateStaticParams() {
   try {
@@ -20,11 +25,11 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({
   params,
-}: {
-  params: { slug: string };
-}): Promise<Metadata> {
+}: ProjectPageProps): Promise<Metadata> {
+  const { slug } = await params;
+
   try {
-    const project = await getProject(params.slug);
+    const project = await getProject(slug);
     return createMetadata({
       title: project.title,
       description: project.summary,
@@ -43,12 +48,12 @@ export async function generateMetadata({
 
 export default async function ProjectDetailPage({
   params,
-}: {
-  params: { slug: string };
-}) {
+}: ProjectPageProps) {
+  const { slug } = await params;
+
   let project;
   try {
-    project = await getProject(params.slug);
+    project = await getProject(slug);
   } catch {
     notFound();
   }

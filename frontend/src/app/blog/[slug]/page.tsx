@@ -8,6 +8,11 @@ import { formatDate } from "@/lib/utils";
 import { createMetadata } from "@/lib/seo";
 
 export const revalidate = 1800;
+export const dynamicParams = true;
+
+type BlogPostPageProps = {
+  params: Promise<{ slug: string }>;
+};
 
 export async function generateStaticParams() {
   try {
@@ -20,11 +25,11 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({
   params,
-}: {
-  params: { slug: string };
-}): Promise<Metadata> {
+}: BlogPostPageProps): Promise<Metadata> {
+  const { slug } = await params;
+
   try {
-    const post = await getBlogPost(params.slug);
+    const post = await getBlogPost(slug);
     return createMetadata({
       title: post.title,
       description: post.summary,
@@ -44,12 +49,12 @@ export async function generateMetadata({
 
 export default async function BlogPostPage({
   params,
-}: {
-  params: { slug: string };
-}) {
+}: BlogPostPageProps) {
+  const { slug } = await params;
+
   let post;
   try {
-    post = await getBlogPost(params.slug);
+    post = await getBlogPost(slug);
   } catch {
     notFound();
   }
