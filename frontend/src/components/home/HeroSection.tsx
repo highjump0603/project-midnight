@@ -47,17 +47,7 @@ export default function HeroSection() {
           <span className="text-silver-50">Project</span>
           <span className="text-gradient-midnight">-Midnight</span>
         </motion.h1>
-
-        {/* Sub text */}
-        <motion.p
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.55, duration: 0.6 }}
-          className="text-silver-300 text-base sm:text-lg max-w-md leading-relaxed"
-        >
-          자정에 무언가를 만드는 소프트웨어 개발자
-        </motion.p>
-
+        
         {/* CTAs */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
@@ -69,14 +59,14 @@ export default function HeroSection() {
             href="/projects"
             className="inline-flex items-center gap-2 px-7 py-3.5 bg-star-gold text-midnight-950 font-mono font-semibold text-sm rounded-xl shadow-gold-glow hover:bg-yellow-400 hover:shadow-[0_0_30px_rgba(255,215,0,0.6)] transition-all duration-200 active:scale-95"
           >
-            프로젝트 보기
+            View Projects
             <ArrowRight size={16} />
           </Link>
           <Link
             href="/blog"
             className="inline-flex items-center gap-2 px-7 py-3.5 bg-transparent border border-silver-300/30 text-silver-100 font-mono text-sm rounded-xl hover:border-silver-100/60 hover:bg-midnight-700 transition-all duration-200 active:scale-95"
           >
-            블로그 읽기
+            Read Blog
           </Link>
         </motion.div>
 
