@@ -7,8 +7,7 @@ import SectionHeading from "@/components/ui/SectionHeading";
 
 // metadata는 layout.tsx에서 상속받음
 
-// TODO: 아래 이름을 실제 이름으로 교체하세요
-const NAME = "[이름]";
+const NAME = "송윤찬";
 
 const TECH_STACK = {
   Frontend: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion"],

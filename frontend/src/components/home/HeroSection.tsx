@@ -6,8 +6,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Github } from "lucide-react";
 import StarField from "@/components/ui/StarField";
 
-// TODO: 아래 이름을 실제 이름으로 교체하세요
-const NAME = "[이름]";
+const NAME = "송윤찬";
 
 export default function HeroSection() {
   return (
