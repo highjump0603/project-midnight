@@ -59,18 +59,32 @@ export default function OpenGraphImage() {
                 boxShadow: "0 0 18px rgba(247, 215, 116, 0.7)",
               }}
             />
-            Project Midnight
+            <span>Project Midnight</span>
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", gap: 20, maxWidth: 840 }}>
-            <div style={{ fontSize: 78, fontWeight: 700, lineHeight: 1.02 }}>
-              Full Stack Projects
-              <br />
-              and Engineering Notes
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                fontSize: 78,
+                fontWeight: 700,
+                lineHeight: 1.02,
+              }}
+            >
+              <span>Full Stack Projects</span>
+              <span>and Engineering Notes</span>
             </div>
-            <div style={{ fontSize: 30, lineHeight: 1.45, color: "#cbd5e1", maxWidth: 760 }}>
-              Portfolio, technical writing, and experiments built with Next.js, FastAPI,
-              TypeScript, and Python.
+            <div
+              style={{
+                display: "flex",
+                maxWidth: 760,
+              }}
+            >
+              <span style={{ fontSize: 30, lineHeight: 1.45, color: "#cbd5e1" }}>
+                Portfolio, technical writing, and experiments built with Next.js, FastAPI,
+                TypeScript, and Python.
+              </span>
             </div>
           </div>
 
@@ -83,8 +97,12 @@ export default function OpenGraphImage() {
               color: "#94a3b8",
             }}
           >
-            <div>project-midnight.dev</div>
-            <div>Projects • Blog • Contact</div>
+            <div style={{ display: "flex" }}>
+              <span>project-midnight.dev</span>
+            </div>
+            <div style={{ display: "flex" }}>
+              <span>Projects • Blog • Contact</span>
+            </div>
           </div>
         </div>
       </div>
