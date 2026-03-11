@@ -2,12 +2,9 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, Code2 } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import StarField from "@/components/ui/StarField";
 import MoonIcon from "@/components/ui/MoonIcon";
-import AnimatedText from "@/components/ui/AnimatedText";
-
-const TECH_STACK = ["Next.js", "TypeScript", "FastAPI", "Python"];
 
 export default function HeroSection() {
   return (
@@ -18,96 +15,55 @@ export default function HeroSection() {
       {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-midnight-950/20 to-midnight-900 pointer-events-none" />
 
-      {/* Radial glow behind content */}
+      {/* Radial glow */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-moon-glow/5 blur-[100px]" />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 section-container text-center flex flex-col items-center gap-8 py-32">
+      <div className="relative z-10 section-container text-center flex flex-col items-center gap-10 py-32">
         {/* Logo mark */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-2"
         >
           <div className="relative inline-block">
             <MoonIcon
-              size={72}
+              size={64}
               className="text-silver-50 drop-shadow-[0_0_30px_rgba(123,123,255,0.5)]"
             />
-            {/* Orbit ring */}
             <div className="absolute inset-0 -m-3 rounded-full border border-moon-glow/20 animate-[spin_20s_linear_infinite]" />
           </div>
         </motion.div>
 
-        {/* Code label */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.5 }}
-        >
-          <span className="code-label flex items-center gap-1.5">
-            <Code2 size={12} />
-            소프트웨어 개발자
-          </span>
-        </motion.div>
-
         {/* Main heading */}
-        <div className="flex flex-col items-center gap-3">
-          <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[1.05] tracking-tight">
-            <AnimatedText
-              text="코드로 만드는,"
-              className="text-silver-50"
-              delay={0.3}
-              staggerDelay={0.025}
-            />
-            <br />
-            <AnimatedText
-              text="at midnight."
-              className="text-gradient-midnight"
-              delay={0.55}
-              staggerDelay={0.03}
-            />
-          </h1>
-        </div>
-
-        {/* Sub heading */}
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.95, duration: 0.6 }}
-          className="font-mono text-silver-300 text-sm sm:text-base max-w-lg leading-relaxed"
+          transition={{ delay: 0.3, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[1.05] tracking-tight"
         >
-          {"// 소프트웨어 공학 전공 → 풀스택 개발자"}
-          <br />
-          {"// 풀스택 · 클린 아키텍처 · 좋은 디자인"}
-        </motion.p>
+          <span className="text-silver-50">Project</span>
+          <span className="text-gradient-midnight">-Midnight</span>
+        </motion.h1>
 
-        {/* Tech stack badges */}
-        <motion.div
+        {/* Sub text */}
+        <motion.p
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.05, duration: 0.5 }}
-          className="flex flex-wrap items-center justify-center gap-2"
+          transition={{ delay: 0.55, duration: 0.6 }}
+          className="text-silver-300 text-base sm:text-lg max-w-md leading-relaxed"
         >
-          {TECH_STACK.map((tech) => (
-            <span
-              key={tech}
-              className="px-3 py-1 bg-midnight-800/60 border border-midnight-600/50 rounded-full text-xs font-mono text-silver-300 hover:border-moon-glow/40 hover:text-silver-100 transition-colors"
-            >
-              {tech}
-            </span>
-          ))}
-        </motion.div>
+          자정에 무언가를 만드는 소프트웨어 개발자
+        </motion.p>
 
         {/* CTAs */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.1, duration: 0.6 }}
-          className="flex flex-wrap items-center justify-center gap-4 mt-2"
+          transition={{ delay: 0.75, duration: 0.6 }}
+          className="flex flex-wrap items-center justify-center gap-4"
         >
           <Link
             href="/projects"
@@ -128,7 +84,7 @@ export default function HeroSection() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.5, duration: 0.5 }}
+          transition={{ delay: 1.2, duration: 0.5 }}
           className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
         >
           <span className="font-mono text-xs text-silver-400">스크롤</span>
