@@ -7,10 +7,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 const NAV_LINKS = [
-  { href: "/projects", label: "프로젝트" },
-  { href: "/blog", label: "블로그" },
-  { href: "/about", label: "소개" },
-  { href: "/contact", label: "연락처" },
+  { href: "/projects", label: "Projects" },
+  { href: "/blog", label: "Blog" },
+  { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export default function Navbar() {
