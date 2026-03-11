@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Github } from "lucide-react";
+import { Menu, X, Github, ArrowUpRight } from "lucide-react";
 
 const NAV_LINKS = [
   { href: "/projects", label: "Projects" },
@@ -82,15 +82,24 @@ export default function Navbar() {
           </ul>
 
           {/* GitHub link */}
-          <a
-            href="https://github.com/highjump0603"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden md:flex items-center text-silver-300 hover:text-silver-50 transition-colors p-2"
-            aria-label="GitHub"
-          >
-            <Github size={18} />
-          </a>
+          <div className="hidden md:flex items-center gap-2">
+            <a
+              href="https://github.com/highjump0603"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center text-silver-300 hover:text-silver-50 transition-colors p-2"
+              aria-label="GitHub"
+            >
+              <Github size={18} />
+            </a>
+            <a
+              href="https://highjump.kr"
+              className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 font-mono text-xs text-silver-400 border border-midnight-600/40 rounded-lg hover:border-moon-glow/30 hover:text-silver-100 transition-all duration-200"
+            >
+              <ArrowUpRight size={12} />
+              highjump
+            </a>
+          </div>
 
           {/* Mobile toggle */}
           <button
@@ -146,6 +155,17 @@ export default function Navbar() {
                   </motion.li>
                 );
               })}
+              <motion.li
+                variants={{ open: { opacity: 1, y: 0 }, closed: { opacity: 0, y: 20 } }}
+              >
+                <a
+                  href="https://highjump.kr"
+                  className="inline-flex items-center gap-2 font-mono text-sm text-silver-400 hover:text-silver-100 transition-colors"
+                >
+                  <ArrowUpRight size={14} />
+                  highjump.kr
+                </a>
+              </motion.li>
             </motion.ul>
           </motion.div>
         )}

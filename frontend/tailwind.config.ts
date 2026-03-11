@@ -34,6 +34,21 @@ const config: Config = {
           glow: "#7B7BFF",
           crescent: "#B8B8E8",
         },
+        hj: {
+          bg: "#F8FAFC",
+          surface: "#FFFFFF",
+          border: "#E2E8F0",
+          "border-dark": "#CBD5E1",
+          text: "#0F172A",
+          secondary: "#475569",
+          muted: "#94A3B8",
+          primary: "#3B5BDB",
+          "primary-light": "#EEF2FF",
+          "primary-dark": "#2F4AC0",
+          accent: "#F97316",
+          "accent-light": "#FFF7ED",
+          "accent-dark": "#EA6C0A",
+        },
       },
       fontFamily: {
         mono: ["JetBrains Mono", "Fira Code", "Consolas", "monospace"],
@@ -88,6 +103,9 @@ const config: Config = {
         card: "0 4px 24px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(184, 184, 232, 0.08)",
         "card-hover":
           "0 8px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(123, 123, 255, 0.25)",
+        "hj-card": "0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04), 0 0 0 1px rgba(226,232,240,0.8)",
+        "hj-card-hover": "0 4px 24px rgba(59,91,219,0.12), 0 0 0 1px rgba(59,91,219,0.15)",
+        "hj-accent": "0 4px 20px rgba(249,115,22,0.3)",
       },
       borderColor: {
         subtle: "rgba(184, 184, 232, 0.12)",

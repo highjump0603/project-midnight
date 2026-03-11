@@ -2,30 +2,89 @@
 
 import { motion } from "framer-motion";
 import { useMemo } from "react";
+import { useTheme } from "@/components/ThemeProvider";
 
-// 별똥별: 우상단 → 좌하단, rotate 145° 고정
+// Midnight: shooting stars
 const SHOOTING_STARS = [
-  { left: "84%", top: "8%",  delay: 0.08, duration: 0.82, length: 150 },
+  { left: "84%", top: "8%", delay: 0.08, duration: 0.82, length: 150 },
   { left: "93%", top: "20%", delay: 0.28, duration: 0.90, length: 115 },
 ];
 
+// Highjump: rising dots
+const RISING_DOTS = [
+  { left: "18%", color: "#3B5BDB", delay: 0, size: 6 },
+  { left: "34%", color: "#F97316", delay: 0.08, size: 4 },
+  { left: "52%", color: "#6366F1", delay: 0.04, size: 5 },
+  { left: "68%", color: "#3B5BDB", delay: 0.12, size: 4 },
+  { left: "83%", color: "#F97316", delay: 0.03, size: 6 },
+];
+
 export default function Template({ children }: { children: React.ReactNode }) {
-  // 반짝이는 배경 별 — 중앙 영역에 집중해 모바일에서도 잘 보임
+  const theme = useTheme();
+
   const sparkles = useMemo(
     () =>
       Array.from({ length: 10 }).map((_, i) => ({
         id: i,
         left: `${20 + ((i * 17) % 60)}%`,
-        top:  `${10 + ((i * 19) % 65)}%`,
+        top: `${10 + ((i * 19) % 65)}%`,
         size: i % 3 === 0 ? 3 : 2,
         delay: (i % 5) * 0.14,
       })),
     []
   );
 
+  if (theme === "highjump") {
+    return (
+      <>
+        {/* White overlay fade */}
+        <motion.div
+          className="fixed inset-0 pointer-events-none z-[200]"
+          style={{ background: "rgba(248, 250, 252, 0.97)" }}
+          initial={{ opacity: 1 }}
+          animate={{ opacity: 0 }}
+          transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+        />
+
+        {/* Rising dots */}
+        {RISING_DOTS.map((dot, i) => (
+          <motion.div
+            key={i}
+            className="fixed pointer-events-none z-[201] rounded-full"
+            style={{
+              left: dot.left,
+              bottom: "38%",
+              width: dot.size,
+              height: dot.size,
+              background: dot.color,
+              boxShadow: `0 0 10px ${dot.color}88`,
+            }}
+            initial={{ y: 0, opacity: 0 }}
+            animate={{ y: -90, opacity: [0, 0.9, 0] }}
+            transition={{
+              delay: dot.delay,
+              duration: 0.75,
+              ease: "easeOut",
+              opacity: { times: [0, 0.2, 1], duration: 0.75 },
+            }}
+          />
+        ))}
+
+        {/* Content */}
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+        >
+          {children}
+        </motion.div>
+      </>
+    );
+  }
+
+  // Midnight theme (original)
   return (
     <>
-      {/* ① 어두운 밤하늘 오버레이 — blur 없이 단순하게 */}
       <motion.div
         className="fixed inset-0 pointer-events-none z-[200]"
         style={{
@@ -37,7 +96,6 @@ export default function Template({ children }: { children: React.ReactNode }) {
         transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
       />
 
-      {/* ② 반짝이는 별 */}
       {sparkles.map((s) => (
         <motion.div
           key={s.id}
@@ -56,7 +114,6 @@ export default function Template({ children }: { children: React.ReactNode }) {
         />
       ))}
 
-      {/* ③ 중앙 글로우 */}
       <motion.div
         className="fixed inset-0 pointer-events-none z-[202]"
         style={{
@@ -68,7 +125,6 @@ export default function Template({ children }: { children: React.ReactNode }) {
         transition={{ duration: 0.75, ease: [0.4, 0, 0.2, 1] }}
       />
 
-      {/* ④ 별똥별 — 등속에 가까운 linear로 자연스러운 궤적 */}
       {SHOOTING_STARS.map((star, i) => (
         <motion.div
           key={i}
@@ -86,11 +142,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
             transformOrigin: "right center",
           }}
           initial={{ x: 20, y: -10, opacity: 0 }}
-          animate={{
-            x: -440,
-            y: 252,
-            opacity: [0, 1, 0.95, 0],
-          }}
+          animate={{ x: -440, y: 252, opacity: [0, 1, 0.95, 0] }}
           transition={{
             delay: star.delay,
             duration: star.duration,
@@ -104,15 +156,10 @@ export default function Template({ children }: { children: React.ReactNode }) {
         />
       ))}
 
-      {/* ⑤ 컨텐츠 — 오버레이와 타이밍 맞춰 자연스럽게 등장 */}
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{
-          duration: 0.55,
-          delay: 0.3,
-          ease: [0.22, 1, 0.36, 1],
-        }}
+        transition={{ duration: 0.55, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
       >
         {children}
       </motion.div>

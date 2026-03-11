@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import HeroSection from "@/components/home/HeroSection";
+import HighjumpHeroSection from "@/components/highjump/HeroSection";
 import FeaturedProjects from "@/components/home/FeaturedProjects";
 import LatestPosts from "@/components/home/LatestPosts";
 import { createMetadata } from "@/lib/seo";
+import { getThemeFromHost } from "@/lib/theme";
 
 export const metadata: Metadata = createMetadata({
   description:
@@ -11,10 +14,14 @@ export const metadata: Metadata = createMetadata({
   keywords: ["portfolio website", "developer blog", "full stack projects"],
 });
 
-export default function HomePage() {
+export default async function HomePage() {
+  const headersList = await headers();
+  const host = headersList.get("host") ?? "";
+  const theme = getThemeFromHost(host);
+
   return (
     <>
-      <HeroSection />
+      {theme === "highjump" ? <HighjumpHeroSection /> : <HeroSection />}
       <FeaturedProjects />
       <LatestPosts />
     </>

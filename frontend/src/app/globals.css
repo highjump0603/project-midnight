@@ -144,3 +144,71 @@
     scrollbar-width: none;
   }
 }
+
+/* ═══ Highjump Theme Overrides ═══ */
+html[data-theme="highjump"] body {
+  background-color: #F8FAFC;
+  color: #0F172A;
+}
+
+html[data-theme="highjump"] ::selection {
+  background: rgba(59, 91, 219, 0.15);
+  color: #0F172A;
+}
+
+html[data-theme="highjump"] ::-webkit-scrollbar-track {
+  background: #F1F5F9;
+}
+
+html[data-theme="highjump"] ::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+}
+
+html[data-theme="highjump"] ::-webkit-scrollbar-thumb:hover {
+  background: #3B5BDB;
+}
+
+/* Card / glass overrides */
+html[data-theme="highjump"] .bg-glass {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+}
+
+/* Text color overrides */
+html[data-theme="highjump"] .text-silver-50 { color: #0F172A; }
+html[data-theme="highjump"] .text-silver-100 { color: #1E293B; }
+html[data-theme="highjump"] .text-silver-200 { color: #334155; }
+html[data-theme="highjump"] .text-silver-300 { color: #475569; }
+html[data-theme="highjump"] .text-silver-400 { color: #64748B; }
+
+/* Background overrides */
+html[data-theme="highjump"] .bg-midnight-950,
+html[data-theme="highjump"] .bg-midnight-900 { background-color: #F8FAFC; }
+html[data-theme="highjump"] .bg-midnight-800 { background-color: #F1F5F9; }
+html[data-theme="highjump"] .bg-midnight-700 { background-color: #E2E8F0; }
+
+/* Border overrides */
+html[data-theme="highjump"] .border-midnight-600\/40 { border-color: rgba(203, 213, 225, 0.7); }
+html[data-theme="highjump"] .border-midnight-600 { border-color: #CBD5E1; }
+
+/* Gradient text override */
+html[data-theme="highjump"] .text-gradient-midnight {
+  background: linear-gradient(135deg, #1E293B 0%, #3B5BDB 60%, #F97316 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Code label override */
+html[data-theme="highjump"] .code-label {
+  background-color: #EEF2FF;
+  color: #3B5BDB;
+  border-color: #C7D2FE;
+}
+
+/* Section heading */
+html[data-theme="highjump"] .text-star-blue { color: #3B5BDB; }
+html[data-theme="highjump"] .border-moon-glow\/20 { border-color: rgba(59, 91, 219, 0.2); }
+html[data-theme="highjump"] .hover\:border-moon-glow\/40:hover { border-color: rgba(59, 91, 219, 0.4); }
