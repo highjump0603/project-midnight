@@ -37,15 +37,15 @@ export default function AnimatedText({
       aria-label={text}
     >
       {words.map((word, wi) => (
-        <span key={wi} className="inline-flex overflow-hidden">
+        <span key={wi} className="inline-flex">
           {word.split("").map((char, ci) => (
             <motion.span
               key={ci}
               variants={{
-                hidden: { opacity: 0, y: "100%" },
-                visible: { opacity: 1, y: "0%" },
+                hidden: { opacity: 0, y: 16 },
+                visible: { opacity: 1, y: 0 },
               }}
-              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
               className="inline-block"
               aria-hidden="true"
             >
