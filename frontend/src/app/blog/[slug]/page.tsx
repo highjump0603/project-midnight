@@ -5,6 +5,7 @@ import { ArrowLeft, Clock, Calendar } from "lucide-react";
 import { getBlogPost, getBlogPosts } from "@/lib/api";
 import ReadingProgress from "@/components/blog/ReadingProgress";
 import { formatDate } from "@/lib/utils";
+import { createMetadata } from "@/lib/seo";
 
 export const revalidate = 1800;
 
@@ -24,17 +25,20 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   try {
     const post = await getBlogPost(params.slug);
-    return {
+    return createMetadata({
       title: post.title,
       description: post.summary,
-      openGraph: {
-        title: post.title,
-        description: post.summary,
-        images: post.cover_url ? [post.cover_url] : [],
-      },
-    };
+      path: `/blog/${post.slug}`,
+      image: post.cover_url,
+      keywords: post.tags,
+      type: "article",
+    });
   } catch {
-    return { title: "Post" };
+    return createMetadata({
+      title: "Post",
+      description: "Technical writing from Project Midnight.",
+      path: "/blog",
+    });
   }
 }
 

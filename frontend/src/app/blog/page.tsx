@@ -3,11 +3,15 @@ import { getBlogPosts } from "@/lib/api";
 import BlogList from "@/components/blog/BlogList";
 import SectionHeading from "@/components/ui/SectionHeading";
 import type { BlogPost } from "@/types/blog";
+import { createMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createMetadata({
   title: "Blog",
-  description: "Thoughts on software, architecture, and the craft of building.",
-};
+  description:
+    "Read technical notes on software engineering, architecture, product building, and lessons learned from shipping projects.",
+  path: "/blog",
+  keywords: ["engineering blog", "software architecture", "technical writing"],
+});
 
 export const revalidate = 1800;
 

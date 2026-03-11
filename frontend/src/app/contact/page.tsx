@@ -2,11 +2,15 @@ import type { Metadata } from "next";
 import { Mail, Github } from "lucide-react";
 import ContactForm from "@/components/contact/ContactForm";
 import SectionHeading from "@/components/ui/SectionHeading";
+import { createMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createMetadata({
   title: "Contact",
-  description: "Get in touch — project inquiries, collaborations, or just to say hello.",
-};
+  description:
+    "Contact Project Midnight for collaboration, project inquiries, or technical conversations.",
+  path: "/contact",
+  keywords: ["contact developer", "project inquiry", "collaboration"],
+});
 
 const CONTACT_INFO = [
   {

@@ -3,33 +3,40 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import PageWrapper from "@/components/layout/PageWrapper";
+import { SITE_NAME } from "@/lib/constants";
+import { createMetadata, siteUrl } from "@/lib/seo";
 
 export const metadata: Metadata = {
+  metadataBase: siteUrl,
+  applicationName: SITE_NAME,
   title: {
-    default: "Project Midnight",
-    template: "%s | Project Midnight",
+    default: SITE_NAME,
+    template: `%s | ${SITE_NAME}`,
   },
-  description:
-    "Software developer portfolio — building things at midnight. Projects, blog, and more.",
-  keywords: ["developer", "portfolio", "software engineer", "web development"],
-  authors: [{ name: "Project Midnight" }],
-  openGraph: {
-    type: "website",
-    locale: "ko_KR",
-    url: process.env.NEXT_PUBLIC_SITE_URL,
-    siteName: "Project Midnight",
-    title: "Project Midnight",
-    description: "Software developer portfolio — building things at midnight.",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Project Midnight",
-    description: "Software developer portfolio — building things at midnight.",
-  },
+  ...createMetadata({
+    description:
+      "Software developer portfolio focused on full stack projects, engineering notes, and things built after midnight.",
+  }),
+  authors: [{ name: SITE_NAME }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
+  category: "technology",
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
+};
+
+export const viewport = {
+  themeColor: "#050816",
+  colorScheme: "dark",
 };
 
 export default function RootLayout({

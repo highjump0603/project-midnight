@@ -3,11 +3,15 @@ import { getProjects } from "@/lib/api";
 import ProjectGrid from "@/components/projects/ProjectGrid";
 import SectionHeading from "@/components/ui/SectionHeading";
 import type { Project } from "@/types/project";
+import { createMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createMetadata({
   title: "Projects",
-  description: "All projects — web apps, tools, and experiments.",
-};
+  description:
+    "Browse web apps, developer tools, and product experiments built in Project Midnight.",
+  path: "/projects",
+  keywords: ["software projects", "portfolio projects", "web apps"],
+});
 
 export const revalidate = 3600;
 

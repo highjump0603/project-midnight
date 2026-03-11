@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowLeft, ExternalLink, Github } from "lucide-react";
 import { getProject, getProjects } from "@/lib/api";
 import TechBadge from "@/components/projects/TechBadge";
+import { createMetadata } from "@/lib/seo";
 
 export const revalidate = 3600;
 
@@ -24,17 +25,19 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   try {
     const project = await getProject(params.slug);
-    return {
+    return createMetadata({
       title: project.title,
       description: project.summary,
-      openGraph: {
-        title: project.title,
-        description: project.summary,
-        images: project.cover_url ? [project.cover_url] : [],
-      },
-    };
+      path: `/projects/${project.slug}`,
+      image: project.cover_url,
+      keywords: project.tech_tags,
+    });
   } catch {
-    return { title: "Project" };
+    return createMetadata({
+      title: "Project",
+      description: "Project details from Project Midnight.",
+      path: "/projects",
+    });
   }
 }
 

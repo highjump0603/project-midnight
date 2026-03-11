@@ -2,11 +2,15 @@ import type { Metadata } from "next";
 import { Code2, Cpu, Globe, BookOpen } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import MoonIcon from "@/components/ui/MoonIcon";
+import { createMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createMetadata({
   title: "About",
-  description: "Software engineering student, developer-in-progress. Building things at midnight.",
-};
+  description:
+    "Learn more about Project Midnight, the engineering mindset behind the work, and the technologies currently in focus.",
+  path: "/about",
+  keywords: ["about developer", "engineering philosophy", "tech stack"],
+});
 
 const TECH_STACK = {
   "Frontend": ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion"],
