@@ -9,7 +9,7 @@ export default function TechBadge({ label, className }: TechBadgeProps) {
   return (
     <span
       className={cn(
-        "inline-block font-mono text-xs text-star-blue bg-midnight-800 border border-midnight-600 px-2 py-0.5 rounded-full",
+        "inline-block font-mono text-xs text-star-blue bg-midnight-800/60 border border-midnight-600/40 hover:border-star-blue/40 px-2.5 py-0.5 rounded-full transition-colors duration-150",
         className
       )}
     >

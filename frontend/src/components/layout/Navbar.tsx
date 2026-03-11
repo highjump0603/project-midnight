@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Github } from "lucide-react";
 
 const NAV_LINKS = [
   { href: "/projects", label: "Projects" },
@@ -80,6 +80,17 @@ export default function Navbar() {
               );
             })}
           </ul>
+
+          {/* GitHub link */}
+          <a
+            href="https://github.com/highjump0603"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden md:flex items-center text-silver-300 hover:text-silver-50 transition-colors p-2"
+            aria-label="GitHub"
+          >
+            <Github size={18} />
+          </a>
 
           {/* Mobile toggle */}
           <button

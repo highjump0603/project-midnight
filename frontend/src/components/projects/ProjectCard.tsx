@@ -16,7 +16,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
     <motion.div
       whileHover={{ y: -4, scale: 1.01 }}
       transition={{ duration: 0.2, ease: "easeOut" }}
-      className="group relative bg-glass rounded-2xl overflow-hidden shadow-card hover:shadow-card-hover transition-shadow duration-300 flex flex-col"
+      className="group relative bg-glass rounded-2xl overflow-hidden border border-midnight-600/40 hover:border-moon-glow/40 shadow-card hover:shadow-card-hover transition-all duration-300 flex flex-col"
     >
       {/* Hover glow border */}
       <div className="absolute inset-0 rounded-2xl border border-moon-glow/0 group-hover:border-moon-glow/25 transition-colors duration-300 pointer-events-none z-10" />

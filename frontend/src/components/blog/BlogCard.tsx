@@ -20,7 +20,7 @@ export default function BlogCard({ post }: BlogCardProps) {
             {post.tags.slice(0, 3).map((tag) => (
               <span
                 key={tag}
-                className="font-mono text-xs text-moon-crescent bg-midnight-800 px-2 py-0.5 rounded-full border border-midnight-600"
+                className="font-mono text-xs text-moon-crescent bg-midnight-800/60 border border-midnight-600/40 hover:border-moon-crescent/40 px-2.5 py-0.5 rounded-full transition-colors duration-150"
               >
                 {tag}
               </span>
