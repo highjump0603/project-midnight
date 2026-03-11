@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import MoonIcon from "@/components/ui/MoonIcon";
 
 const NAV_LINKS = [
   { href: "/projects", label: "프로젝트" },
@@ -32,24 +31,20 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${
           scrolled
-            ? "bg-glass border-b border-midnight-600/40 shadow-[0_2px_20px_rgba(0,0,0,0.4)]"
-            : "bg-transparent"
+            ? "bg-glass border-midnight-600/40 shadow-[0_2px_20px_rgba(0,0,0,0.4)]"
+            : "bg-transparent border-transparent"
         }`}
       >
         <nav className="section-container flex items-center justify-between h-16">
           {/* Brand */}
           <Link
             href="/"
-            className="flex items-center gap-2.5 group"
+            className="flex items-center group"
             aria-label="Project Midnight Home"
           >
-            <MoonIcon
-              size={28}
-              className="text-silver-50 group-hover:drop-shadow-[0_0_8px_rgba(123,123,255,0.8)] transition-all duration-300"
-            />
-            <span className="font-mono text-sm font-medium text-silver-50 hidden sm:block">
+            <span className="font-mono text-sm font-medium text-silver-50">
               <span className="text-moon-glow">&lt;</span>
               {" Project Midnight "}
               <span className="text-moon-glow">/&gt;</span>
