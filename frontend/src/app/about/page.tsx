@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { Github, Mail, Code2, Cpu, Globe, BookOpen } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
@@ -74,25 +73,9 @@ export default function AboutPage() {
         <motion.section
           {...fadeUp}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="flex flex-col sm:flex-row items-center sm:items-start gap-10 mb-20"
+          className="mb-20"
         >
-          {/* 프로필 사진 */}
-          <div className="shrink-0 relative">
-            <div className="absolute inset-0 rounded-full bg-moon-glow/15 blur-2xl scale-110" />
-            <div className="absolute inset-0 -m-3 rounded-full border border-moon-glow/20 animate-[spin_24s_linear_infinite]" />
-            <div className="relative w-40 h-40 sm:w-48 sm:h-48 rounded-full overflow-hidden border-2 border-moon-glow/40 shadow-[0_0_40px_rgba(123,123,255,0.25)]">
-              <Image
-                src="/images/profile.jpg"
-                alt={NAME}
-                fill
-                className="object-cover"
-                priority
-              />
-            </div>
-          </div>
-
-          {/* 텍스트 */}
-          <div className="flex flex-col gap-4 text-center sm:text-left items-center sm:items-start">
+          <div className="flex flex-col gap-4">
             <div>
               <p className="font-mono text-sm text-star-blue mb-1">// about me</p>
               <h1 className="font-display text-4xl sm:text-5xl font-bold text-silver-50">

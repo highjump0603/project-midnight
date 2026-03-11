@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight, Github } from "lucide-react";
 import StarField from "@/components/ui/StarField";
@@ -19,10 +18,10 @@ export default function HeroSection() {
       </div>
 
       <div className="relative z-10 section-container py-28 md:py-0 md:min-h-[100svh] md:flex md:items-center">
-        <div className="flex flex-col-reverse md:flex-row items-center gap-12 md:gap-16 w-full">
+        <div className="flex flex-col items-center w-full">
 
-          {/* ── 좌측: 텍스트 ── */}
-          <div className="flex-1 flex flex-col gap-6 text-center md:text-left items-center md:items-start">
+          {/* ── 텍스트 ── */}
+          <div className="flex flex-col gap-6 text-center items-center max-w-2xl">
 
             {/* code label */}
             <motion.div
@@ -97,32 +96,6 @@ export default function HeroSection() {
               github.com/highjump0603
             </motion.a>
           </div>
-
-          {/* ── 우측: 프로필 사진 ── */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.88 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.15, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-            className="shrink-0 flex items-center justify-center"
-          >
-            <div className="relative">
-              {/* 배경 글로우 */}
-              <div className="absolute inset-0 rounded-full bg-moon-glow/15 blur-2xl scale-110" />
-              {/* 회전 궤도 링 */}
-              <div className="absolute inset-0 -m-4 rounded-full border border-moon-glow/20 animate-[spin_24s_linear_infinite]" />
-              <div className="absolute inset-0 -m-8 rounded-full border border-star-blue/10 animate-[spin_40s_linear_infinite_reverse]" />
-              {/* 프로필 이미지 */}
-              <div className="relative w-52 h-52 sm:w-60 sm:h-60 md:w-72 md:h-72 rounded-full overflow-hidden border-2 border-moon-glow/40 shadow-[0_0_40px_rgba(123,123,255,0.25)]">
-                <Image
-                  src="/images/profile.jpg"
-                  alt="Profile"
-                  fill
-                  className="object-cover"
-                  priority
-                />
-              </div>
-            </div>
-          </motion.div>
 
         </div>
       </div>
