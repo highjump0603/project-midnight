@@ -3,10 +3,10 @@ import { Github, Mail, ExternalLink } from "lucide-react";
 import MoonIcon from "@/components/ui/MoonIcon";
 
 const NAV_LINKS = [
-  { href: "/projects", label: "Projects" },
-  { href: "/blog", label: "Blog" },
-  { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
+  { href: "/projects", label: "프로젝트" },
+  { href: "/blog", label: "블로그" },
+  { href: "/about", label: "소개" },
+  { href: "/contact", label: "연락처" },
 ];
 
 const SOCIAL_LINKS = [
@@ -46,14 +46,14 @@ export default function Footer() {
               </span>
             </Link>
             <p className="text-silver-300 text-sm leading-relaxed max-w-xs">
-              Software developer building things at midnight.
+              자정에 무언가를 만드는 소프트웨어 개발자.
             </p>
           </div>
 
           {/* Navigation */}
           <div>
             <h3 className="font-mono text-xs text-silver-400 uppercase tracking-widest mb-4">
-              Navigation
+              메뉴
             </h3>
             <ul className="flex flex-col gap-2.5">
               {NAV_LINKS.map((link) => (
@@ -72,7 +72,7 @@ export default function Footer() {
           {/* Social */}
           <div>
             <h3 className="font-mono text-xs text-silver-400 uppercase tracking-widest mb-4">
-              Contact
+              연락처
             </h3>
             <ul className="flex flex-col gap-2.5">
               {SOCIAL_LINKS.map(({ href, label, icon: Icon }) => (

@@ -20,14 +20,14 @@ export default async function LatestPosts() {
         <div className="flex items-end justify-between mb-12 gap-4 flex-wrap">
           <SectionHeading
             label="// blog"
-            title="Latest Posts"
-            description="Thoughts on software, architecture, and the craft of building."
+            title="최신 글"
+            description="소프트웨어, 아키텍처, 그리고 만드는 것에 대한 이야기."
           />
           <Link
             href="/blog"
             className="inline-flex items-center gap-1.5 font-mono text-sm text-star-blue hover:text-star-blue/80 transition-colors shrink-0"
           >
-            All posts
+            전체 글
             <ArrowRight size={14} />
           </Link>
         </div>

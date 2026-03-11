@@ -20,14 +20,14 @@ export default async function FeaturedProjects() {
         <div className="flex items-end justify-between mb-12 gap-4 flex-wrap">
           <SectionHeading
             label="// projects"
-            title="Featured Work"
-            description="A selection of projects I've built — from web apps to tools and experiments."
+            title="주요 프로젝트"
+            description="웹 앱부터 도구, 실험적인 작업까지 — 직접 만든 프로젝트 모음입니다."
           />
           <Link
             href="/projects"
             className="inline-flex items-center gap-1.5 font-mono text-sm text-star-blue hover:text-star-blue/80 transition-colors shrink-0"
           >
-            All projects
+            전체 프로젝트
             <ArrowRight size={14} />
           </Link>
         </div>
