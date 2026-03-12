@@ -1,6 +1,8 @@
 import Link from "next/link";
-import { Github, Mail, ExternalLink } from "lucide-react";
-import MoonIcon from "@/components/ui/MoonIcon";
+import { Github, Mail, ExternalLink, Linkedin, Globe } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+import { getSettings } from "@/lib/api";
+import type { SocialLink } from "@/lib/api";
 
 const NAV_LINKS = [
   { href: "/projects", label: "Projects" },
@@ -9,21 +11,26 @@ const NAV_LINKS = [
   { href: "/contact", label: "Contact" },
 ];
 
-const SOCIAL_LINKS = [
-  {
-    href: "https://github.com/highjump0603",
-    label: "GitHub",
-    icon: Github,
-  },
-  {
-    href: "mailto:hello@project-midnight.dev",
-    label: "Email",
-    icon: Mail,
-  },
-];
+const ICON_MAP: Record<string, LucideIcon> = {
+  github: Github,
+  email: Mail,
+  linkedin: Linkedin,
+  link: Globe,
+  twitter: Globe,
+  youtube: Globe,
+  instagram: Globe,
+};
 
-export default function Footer() {
+export default async function Footer() {
   const currentYear = new Date().getFullYear();
+
+  let socialLinks: SocialLink[] = [];
+  try {
+    const settings = await getSettings();
+    socialLinks = settings.social_links ?? [];
+  } catch {
+    // fallback to empty — API may be unavailable during build
+  }
 
   return (
     <footer className="relative border-t border-midnight-600/30 bg-midnight-950/80">
@@ -63,32 +70,37 @@ export default function Footer() {
           </div>
 
           {/* Social */}
-          <div>
-            <h3 className="font-mono text-xs text-silver-400 uppercase tracking-widest mb-4">
-              Connect
-            </h3>
-            <ul className="flex flex-col gap-2.5">
-              {SOCIAL_LINKS.map(({ href, label, icon: Icon }) => (
-                <li key={href}>
-                  <a
-                    href={href}
-                    target={href.startsWith("http") ? "_blank" : undefined}
-                    rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-                    className="flex items-center gap-2 text-silver-200 hover:text-star-blue text-sm transition-colors group"
-                  >
-                    <Icon size={14} />
-                    <span>{label}</span>
-                    {href.startsWith("http") && (
-                      <ExternalLink
-                        size={10}
-                        className="opacity-0 group-hover:opacity-100 transition-opacity"
-                      />
-                    )}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {socialLinks.length > 0 && (
+            <div>
+              <h3 className="font-mono text-xs text-silver-400 uppercase tracking-widest mb-4">
+                Connect
+              </h3>
+              <ul className="flex flex-col gap-2.5">
+                {socialLinks.map(({ href, label, icon }) => {
+                  const Icon = ICON_MAP[icon] ?? Globe;
+                  return (
+                    <li key={href}>
+                      <a
+                        href={href}
+                        target={href.startsWith("http") ? "_blank" : undefined}
+                        rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+                        className="flex items-center gap-2 text-silver-200 hover:text-star-blue text-sm transition-colors group"
+                      >
+                        <Icon size={14} />
+                        <span>{label}</span>
+                        {href.startsWith("http") && (
+                          <ExternalLink
+                            size={10}
+                            className="opacity-0 group-hover:opacity-100 transition-opacity"
+                          />
+                        )}
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          )}
         </div>
 
         {/* Bottom bar */}

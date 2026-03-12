@@ -159,6 +159,24 @@ export async function adminDeleteContact(id: string) {
   if (!res.ok) throw new Error("Failed to delete contact");
 }
 
+// ── Settings ─────────────────────────────────────────────────────────────────
+
+export async function adminGetSettings() {
+  const res = await fetch(`${API}/settings`, { headers: authHeaders() });
+  if (!res.ok) throw new Error("Failed to fetch settings");
+  return res.json();
+}
+
+export async function adminUpdateSettings(data: Record<string, unknown>) {
+  const res = await fetch(`${API}/settings`, {
+    method: "PUT",
+    headers: authHeaders(),
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) throw new Error("Failed to update settings");
+  return res.json();
+}
+
 // ── Stats ────────────────────────────────────────────────────────────────────
 
 export async function adminGetStats() {

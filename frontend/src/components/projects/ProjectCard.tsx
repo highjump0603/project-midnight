@@ -6,44 +6,64 @@ import TechBadge from "./TechBadge";
 
 interface ProjectCardProps {
   project: Project;
+  index?: number;
 }
 
-export default function ProjectCard({ project }: ProjectCardProps) {
+export default function ProjectCard({ project, index }: ProjectCardProps) {
+  const num = index !== undefined ? String(index + 1).padStart(2, "0") : null;
+
   return (
     <Link
       href={`/projects/${project.slug}`}
-      className="group relative bg-glass rounded-2xl overflow-hidden border border-midnight-600/40 hover:border-moon-glow/35 shadow-card hover:shadow-card-hover transition-all duration-300 flex flex-col"
+      className="group relative bg-midnight-900/60 rounded-2xl overflow-hidden border border-midnight-700/50 hover:border-moon-glow/30 shadow-card hover:shadow-card-hover transition-all duration-300 flex flex-col"
     >
       {/* Hover glow */}
-      <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none bg-[radial-gradient(ellipse_at_top,rgba(79,195,247,0.04)_0%,transparent_70%)]" />
+      <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none bg-[radial-gradient(ellipse_at_top_left,rgba(79,195,247,0.06)_0%,transparent_60%)]" />
 
-      {/* Cover image */}
+      {/* Cover */}
       {project.cover_url ? (
         <div className="relative h-44 w-full overflow-hidden shrink-0">
           <Image
             src={project.cover_url}
             alt={project.title}
             fill
-            className="object-cover group-hover:scale-105 transition-transform duration-500"
+            className="object-cover group-hover:scale-105 transition-transform duration-700"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-midnight-900/80 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-midnight-900 via-midnight-900/20 to-transparent" />
           {project.is_featured && (
             <div className="absolute top-3 left-3 flex items-center gap-1 bg-star-gold/20 border border-star-gold/40 backdrop-blur-sm text-star-gold font-mono text-[10px] px-2 py-0.5 rounded-full">
               <Star size={9} />
               추천
             </div>
           )}
+          {num && (
+            <div className="absolute top-3 right-3 font-mono text-xs text-silver-400/50 bg-midnight-900/60 backdrop-blur-sm px-1.5 py-0.5 rounded">
+              {num}
+            </div>
+          )}
         </div>
       ) : (
-        <div className="relative h-44 bg-midnight-800/60 flex items-center justify-center shrink-0 overflow-hidden">
-          <div className="font-mono text-5xl text-midnight-600 select-none group-hover:text-midnight-500 transition-colors duration-300">
+        <div className="relative h-44 bg-midnight-800/40 flex items-center justify-center shrink-0 overflow-hidden">
+          <div
+            className="absolute inset-0 opacity-[0.04]"
+            style={{
+              backgroundImage:
+                "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)",
+              backgroundSize: "20px 20px",
+            }}
+          />
+          <div className="font-mono text-5xl text-midnight-700 select-none group-hover:text-midnight-600 transition-colors duration-300">
             &lt;/&gt;
           </div>
-          <div className="absolute inset-0 bg-gradient-to-br from-star-blue/3 to-transparent" />
           {project.is_featured && (
             <div className="absolute top-3 left-3 flex items-center gap-1 bg-star-gold/20 border border-star-gold/40 text-star-gold font-mono text-[10px] px-2 py-0.5 rounded-full">
               <Star size={9} />
               추천
+            </div>
+          )}
+          {num && (
+            <div className="absolute top-3 right-3 font-mono text-xs text-silver-500/40">
+              {num}
             </div>
           )}
         </div>
@@ -60,7 +80,6 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           </p>
         </div>
 
-        {/* Tech tags */}
         {project.tech_tags.length > 0 && (
           <div className="flex flex-wrap gap-1.5">
             {project.tech_tags.slice(0, 4).map((tag) => (
@@ -74,9 +93,8 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           </div>
         )}
 
-        {/* Footer */}
-        <div className="mt-auto pt-3 flex items-center justify-between border-t border-midnight-700/50">
-          <span className="font-mono text-xs text-silver-500 group-hover:text-silver-300 transition-colors">
+        <div className="mt-auto pt-3 flex items-center justify-between border-t border-midnight-700/40">
+          <span className="font-mono text-xs text-silver-500 group-hover:text-moon-glow/70 transition-colors">
             자세히 보기 →
           </span>
           <div className="flex items-center gap-3">

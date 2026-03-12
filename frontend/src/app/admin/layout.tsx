@@ -11,6 +11,7 @@ import {
   Mail,
   LogOut,
   ShieldCheck,
+  Settings,
 } from "lucide-react";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -33,6 +34,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     { href: "/admin/projects", label: "프로젝트", icon: FolderKanban },
     { href: "/admin/blog", label: "블로그", icon: BookOpen },
     { href: "/admin/contacts", label: "문의", icon: Mail },
+    { href: "/admin/settings", label: "설정", icon: Settings },
   ];
 
   return (

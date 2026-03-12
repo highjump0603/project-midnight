@@ -88,6 +88,22 @@ export async function submitContact(
   });
 }
 
+// ─── Settings ────────────────────────────────────────────────────────────────
+
+export interface SocialLink {
+  label: string;
+  href: string;
+  icon: string;
+}
+
+export interface SiteSettings {
+  social_links: SocialLink[];
+}
+
+export async function getSettings(): Promise<SiteSettings> {
+  return apiFetch<SiteSettings>("/settings", { cache: "no-store" });
+}
+
 // ─── Stats ───────────────────────────────────────────────────────────────────
 
 export async function recordView(pagePath: string, slug?: string): Promise<void> {

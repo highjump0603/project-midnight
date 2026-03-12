@@ -36,12 +36,18 @@ export default async function ProjectsPage() {
   return (
     <main className="section-padding">
       <div className="section-container">
-        <SectionHeading
-          label="// projects"
-          title="All Projects"
-          description="Everything I've built — personal projects, open source contributions, and experiments."
-          className="mb-12"
-        />
+        <div className="flex items-end justify-between mb-12 gap-4">
+          <SectionHeading
+            label="// projects"
+            title="프로젝트"
+            description="직접 만든 사이드 프로젝트, 오픈소스 기여, 그리고 실험들."
+          />
+          {projects.length > 0 && (
+            <span className="font-mono text-xs text-silver-500 shrink-0 pb-1">
+              {projects.length}개
+            </span>
+          )}
+        </div>
         <ProjectGrid projects={projects} />
       </div>
     </main>
