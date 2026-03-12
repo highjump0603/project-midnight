@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import { Mail, Github } from "lucide-react";
 import ContactForm from "@/components/contact/ContactForm";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { createMetadata } from "@/lib/seo";
+import { getThemeFromHost } from "@/lib/theme";
+import HjContactPage from "@/components/highjump/pages/ContactPage";
 
 export const metadata: Metadata = createMetadata({
   title: "Contact",
@@ -22,25 +25,28 @@ const CONTACT_INFO = [
   {
     icon: Github,
     label: "GitHub",
-    value: "github.com/",
-    href: "https://github.com/",
+    value: "github.com/highjump0603",
+    href: "https://github.com/highjump0603",
   },
 ];
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const headersList = await headers();
+  const host = headersList.get("host") ?? "";
+  const theme = getThemeFromHost(host);
+
+  if (theme === "highjump") return <HjContactPage />;
+
   return (
     <main className="section-padding">
       <div className="section-container">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-          {/* Left */}
           <div className="flex flex-col gap-8">
             <SectionHeading
               label="// contact"
               title="Get In Touch"
               description="Have a project in mind, want to collaborate, or just want to say hello? Drop me a message."
             />
-
-            {/* Contact info */}
             <div className="flex flex-col gap-4">
               {CONTACT_INFO.map(({ icon: Icon, label, value, href }) => (
                 <a
@@ -61,8 +67,6 @@ export default function ContactPage() {
               ))}
             </div>
           </div>
-
-          {/* Right */}
           <div className="bg-glass rounded-2xl p-8 border border-midnight-600/40">
             <ContactForm />
           </div>

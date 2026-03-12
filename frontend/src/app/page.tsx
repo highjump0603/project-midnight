@@ -4,6 +4,8 @@ import HeroSection from "@/components/home/HeroSection";
 import HighjumpHeroSection from "@/components/highjump/HeroSection";
 import FeaturedProjects from "@/components/home/FeaturedProjects";
 import LatestPosts from "@/components/home/LatestPosts";
+import HjFeaturedProjects from "@/components/highjump/home/FeaturedProjects";
+import HjLatestPosts from "@/components/highjump/home/LatestPosts";
 import { createMetadata } from "@/lib/seo";
 import { getThemeFromHost } from "@/lib/theme";
 
@@ -19,9 +21,19 @@ export default async function HomePage() {
   const host = headersList.get("host") ?? "";
   const theme = getThemeFromHost(host);
 
+  if (theme === "highjump") {
+    return (
+      <>
+        <HighjumpHeroSection />
+        <HjFeaturedProjects />
+        <HjLatestPosts />
+      </>
+    );
+  }
+
   return (
     <>
-      {theme === "highjump" ? <HighjumpHeroSection /> : <HeroSection />}
+      <HeroSection />
       <FeaturedProjects />
       <LatestPosts />
     </>

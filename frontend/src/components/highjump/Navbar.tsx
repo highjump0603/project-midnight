@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Github, Moon } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { Menu, X, Moon } from "lucide-react";
 
 const NAV_LINKS = [
   { href: "/projects", label: "Projects" },
@@ -15,14 +15,7 @@ const NAV_LINKS = [
 
 export default function HighjumpNavbar() {
   const pathname = usePathname();
-  const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   useEffect(() => {
     setMobileOpen(false);
@@ -30,24 +23,15 @@ export default function HighjumpNavbar() {
 
   return (
     <>
-      <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${
-          scrolled
-            ? "bg-white/90 backdrop-blur-md border-hj-border shadow-sm"
-            : "bg-transparent border-transparent"
-        }`}
-      >
-        <nav className="section-container flex items-center justify-between h-16">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-[#09090B] border-b border-white/10">
+        <nav className="section-container flex items-center justify-between h-14">
           {/* Brand */}
-          <Link href="/" className="flex items-center group" aria-label="highjump Home">
-            <span className="font-display text-xl font-bold text-hj-primary group-hover:text-hj-primary-dark transition-colors">
-              highjump
-              <span className="text-hj-accent">.</span>
-            </span>
+          <Link href="/" className="font-display font-black text-lg text-white tracking-tight">
+            highjump<span className="text-hj-accent">.</span>
           </Link>
 
-          {/* Desktop Nav */}
-          <ul className="hidden md:flex items-center gap-1">
+          {/* Desktop nav */}
+          <ul className="hidden md:flex items-center gap-0.5">
             {NAV_LINKS.map((link) => {
               const isActive =
                 pathname === link.href ||
@@ -56,10 +40,10 @@ export default function HighjumpNavbar() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className={`px-4 py-2 font-mono text-sm rounded-md transition-colors duration-200 ${
+                    className={`px-4 py-2 font-mono text-sm rounded-md transition-colors duration-150 ${
                       isActive
-                        ? "text-hj-primary bg-hj-primary-light font-medium"
-                        : "text-hj-secondary hover:text-hj-text hover:bg-hj-bg"
+                        ? "text-white bg-white/10"
+                        : "text-white/50 hover:text-white hover:bg-white/8"
                     }`}
                   >
                     {link.label}
@@ -69,28 +53,19 @@ export default function HighjumpNavbar() {
             })}
           </ul>
 
-          <div className="hidden md:flex items-center gap-2">
-            <a
-              href="https://github.com/highjump0603"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 text-hj-secondary hover:text-hj-text transition-colors rounded-md hover:bg-hj-bg"
-              aria-label="GitHub"
-            >
-              <Github size={18} />
-            </a>
+          <div className="hidden md:flex items-center">
             <a
               href="https://project-midnight.dev"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 font-mono text-xs text-hj-secondary border border-hj-border rounded-lg hover:border-hj-primary/40 hover:text-hj-primary transition-all duration-200"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 font-mono text-xs text-white/40 border border-white/10 rounded-lg hover:text-white/80 hover:border-white/20 transition-all duration-200"
             >
-              <Moon size={12} />
+              <Moon size={11} />
               midnight
             </a>
           </div>
 
           {/* Mobile toggle */}
           <button
-            className="md:hidden p-2 rounded-md text-hj-secondary hover:text-hj-text hover:bg-hj-bg transition-colors"
+            className="md:hidden p-2 text-white/60 hover:text-white transition-colors"
             onClick={() => setMobileOpen((v) => !v)}
             aria-label="Toggle menu"
           >
@@ -103,13 +78,13 @@ export default function HighjumpNavbar() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -8 }}
+            initial={{ opacity: 0, y: -4 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.2 }}
-            className="fixed top-16 left-0 right-0 z-40 md:hidden bg-white border-b border-hj-border shadow-lg"
+            exit={{ opacity: 0, y: -4 }}
+            transition={{ duration: 0.15 }}
+            className="fixed top-14 left-0 right-0 z-40 md:hidden bg-[#09090B] border-b border-white/10"
           >
-            <div className="section-container py-4 flex flex-col gap-1">
+            <div className="section-container py-3 flex flex-col gap-0.5">
               {NAV_LINKS.map((link) => {
                 const isActive =
                   pathname === link.href || pathname.startsWith(link.href);
@@ -119,30 +94,21 @@ export default function HighjumpNavbar() {
                     href={link.href}
                     className={`px-4 py-3 font-mono text-sm rounded-lg transition-colors ${
                       isActive
-                        ? "text-hj-primary bg-hj-primary-light font-medium"
-                        : "text-hj-secondary hover:text-hj-text hover:bg-hj-bg"
+                        ? "text-white bg-white/10"
+                        : "text-white/50 hover:text-white hover:bg-white/8"
                     }`}
                   >
                     {link.label}
                   </Link>
                 );
               })}
-              <div className="flex items-center gap-4 px-4 py-3 mt-2 border-t border-hj-border">
-                <a
-                  href="https://github.com/highjump0603"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 font-mono text-xs text-hj-secondary hover:text-hj-text transition-colors"
-                >
-                  <Github size={13} />
-                  GitHub
-                </a>
+              <div className="px-4 py-3 mt-1 border-t border-white/10">
                 <a
                   href="https://project-midnight.dev"
-                  className="inline-flex items-center gap-1.5 font-mono text-xs text-hj-secondary hover:text-hj-primary transition-colors"
+                  className="inline-flex items-center gap-1.5 font-mono text-xs text-white/40 hover:text-white/80 transition-colors"
                 >
                   <Moon size={12} />
-                  midnight
+                  Switch to midnight
                 </a>
               </div>
             </div>

@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import { getBlogPosts } from "@/lib/api";
 import BlogList from "@/components/blog/BlogList";
 import SectionHeading from "@/components/ui/SectionHeading";
 import type { BlogPost } from "@/types/blog";
 import { createMetadata } from "@/lib/seo";
+import { getThemeFromHost } from "@/lib/theme";
+import HjBlogPage from "@/components/highjump/pages/BlogPage";
 
 export const metadata: Metadata = createMetadata({
   title: "Blog",
@@ -16,6 +19,12 @@ export const metadata: Metadata = createMetadata({
 export const revalidate = 1800;
 
 export default async function BlogPage() {
+  const headersList = await headers();
+  const host = headersList.get("host") ?? "";
+  const theme = getThemeFromHost(host);
+
+  if (theme === "highjump") return <HjBlogPage />;
+
   let posts: BlogPost[] = [];
   try {
     const res = await getBlogPosts({ limit: 50 });

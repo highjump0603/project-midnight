@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import { getProjects } from "@/lib/api";
 import ProjectGrid from "@/components/projects/ProjectGrid";
 import SectionHeading from "@/components/ui/SectionHeading";
 import type { Project } from "@/types/project";
 import { createMetadata } from "@/lib/seo";
+import { getThemeFromHost } from "@/lib/theme";
+import HjProjectsPage from "@/components/highjump/pages/ProjectsPage";
 
 export const metadata: Metadata = createMetadata({
   title: "Projects",
@@ -16,6 +19,12 @@ export const metadata: Metadata = createMetadata({
 export const revalidate = 3600;
 
 export default async function ProjectsPage() {
+  const headersList = await headers();
+  const host = headersList.get("host") ?? "";
+  const theme = getThemeFromHost(host);
+
+  if (theme === "highjump") return <HjProjectsPage />;
+
   let projects: Project[] = [];
   try {
     const res = await getProjects({ limit: 50 });

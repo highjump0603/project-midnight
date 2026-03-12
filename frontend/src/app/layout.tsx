@@ -76,7 +76,7 @@ export default async function RootLayout({
         <ThemeProvider theme={theme}>
           {isMidnight ? <Navbar /> : <HighjumpNavbar />}
           <PageWrapper>
-            <div className="flex-1 pt-16">{children}</div>
+            <div className={`flex-1 ${isMidnight ? "pt-16" : "pt-14"}`}>{children}</div>
           </PageWrapper>
           {isMidnight ? <Footer /> : <HighjumpFooter />}
         </ThemeProvider>
