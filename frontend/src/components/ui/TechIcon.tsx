@@ -4,9 +4,9 @@ import {
   SiNginx, SiNodedotjs, SiRedis, SiRust, SiGithub,
   SiJavascript, SiGo, SiKubernetes, SiMongodb,
   SiMysql, SiPrisma, SiGraphql, SiVuedotjs, SiSvelte,
-  SiDjango, SiFlask, SiSpring, SiAmazonaws,
+  SiDjango, SiFlask, SiSpring,
   SiGooglecloud, SiVercel, SiCloudflare, SiGitlab, SiJira,
-  SiJava, SiKotlin, SiSwift,
+  SiOpenjdk, SiKotlin, SiSwift,
 } from "react-icons/si";
 import type { IconType } from "react-icons";
 
@@ -38,13 +38,12 @@ export const TECH_ICON_MAP: Record<string, IconType> = {
   django: SiDjango,
   flask: SiFlask,
   spring: SiSpring,
-  aws: SiAmazonaws,
   gcp: SiGooglecloud,
   vercel: SiVercel,
   cloudflare: SiCloudflare,
   gitlab: SiGitlab,
   jira: SiJira,
-  java: SiJava,
+  java: SiOpenjdk,
   kotlin: SiKotlin,
   swift: SiSwift,
 };
