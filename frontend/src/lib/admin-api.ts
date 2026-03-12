@@ -12,14 +12,6 @@ function authHeaders() {
   };
 }
 
-function revalidate(section: "projects" | "blog") {
-  fetch("/api/revalidate", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ section }),
-  }).catch(() => {});
-}
-
 // ── Auth ─────────────────────────────────────────────────────────────────────
 
 export async function login(username: string, password: string) {
@@ -69,9 +61,7 @@ export async function adminCreateProject(data: Record<string, unknown>) {
     const err = await res.json().catch(() => ({}));
     throw new Error(err.detail ?? "Failed to create project");
   }
-  const result = await res.json();
-  revalidate("projects");
-  return result;
+  return res.json();
 }
 
 export async function adminUpdateProject(slug: string, data: Record<string, unknown>) {
@@ -84,9 +74,7 @@ export async function adminUpdateProject(slug: string, data: Record<string, unkn
     const err = await res.json().catch(() => ({}));
     throw new Error(err.detail ?? "Failed to update project");
   }
-  const result = await res.json();
-  revalidate("projects");
-  return result;
+  return res.json();
 }
 
 export async function adminDeleteProject(slug: string) {
@@ -95,7 +83,6 @@ export async function adminDeleteProject(slug: string) {
     headers: authHeaders(),
   });
   if (!res.ok) throw new Error("Failed to delete project");
-  revalidate("projects");
 }
 
 // ── Blog ─────────────────────────────────────────────────────────────────────
@@ -122,9 +109,7 @@ export async function adminCreatePost(data: Record<string, unknown>) {
     const err = await res.json().catch(() => ({}));
     throw new Error(err.detail ?? "Failed to create post");
   }
-  const result = await res.json();
-  revalidate("blog");
-  return result;
+  return res.json();
 }
 
 export async function adminUpdatePost(slug: string, data: Record<string, unknown>) {
@@ -137,9 +122,7 @@ export async function adminUpdatePost(slug: string, data: Record<string, unknown
     const err = await res.json().catch(() => ({}));
     throw new Error(err.detail ?? "Failed to update post");
   }
-  const result = await res.json();
-  revalidate("blog");
-  return result;
+  return res.json();
 }
 
 export async function adminDeletePost(slug: string) {
@@ -148,7 +131,6 @@ export async function adminDeletePost(slug: string) {
     headers: authHeaders(),
   });
   if (!res.ok) throw new Error("Failed to delete post");
-  revalidate("blog");
 }
 
 // ── Contacts ─────────────────────────────────────────────────────────────────

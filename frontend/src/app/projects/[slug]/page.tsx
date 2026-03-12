@@ -7,7 +7,7 @@ import { getProject, getProjects } from "@/lib/api";
 import TechBadge from "@/components/projects/TechBadge";
 import { createMetadata } from "@/lib/seo";
 
-export const revalidate = 3600;
+export const dynamic = "force-dynamic";
 export const dynamicParams = true;
 
 type ProjectPageProps = {

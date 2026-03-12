@@ -16,7 +16,7 @@ export const metadata: Metadata = createMetadata({
   keywords: ["engineering blog", "software architecture", "technical writing"],
 });
 
-export const revalidate = 1800;
+export const dynamic = "force-dynamic";
 
 export default async function BlogPage() {
   const headersList = await headers();

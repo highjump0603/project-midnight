@@ -7,7 +7,7 @@ import ReadingProgress from "@/components/blog/ReadingProgress";
 import { formatDate } from "@/lib/utils";
 import { createMetadata } from "@/lib/seo";
 
-export const revalidate = 1800;
+export const dynamic = "force-dynamic";
 export const dynamicParams = true;
 
 type BlogPostPageProps = {

@@ -16,7 +16,7 @@ export const metadata: Metadata = createMetadata({
   keywords: ["software projects", "portfolio projects", "web apps"],
 });
 
-export const revalidate = 3600;
+export const dynamic = "force-dynamic";
 
 export default async function ProjectsPage() {
   const headersList = await headers();
