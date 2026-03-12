@@ -1,11 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, Github } from "lucide-react";
 import StarField from "@/components/ui/StarField";
-
-const NAME = "송윤찬";
 
 export default function HeroSection() {
   return (
@@ -13,90 +9,33 @@ export default function HeroSection() {
       <StarField starCount={180} />
 
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-midnight-950/20 to-midnight-900 pointer-events-none" />
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-moon-glow/5 blur-[120px]" />
-      </div>
 
       <div className="relative z-10 section-container py-28 md:py-0 md:min-h-[100svh] md:flex md:items-center">
         <div className="flex flex-col items-center w-full">
-
           {/* ── 텍스트 ── */}
-          <div className="flex flex-col gap-6 text-center items-center max-w-2xl">
-
-            {/* code label */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
-            >
-              <span className="code-label">&lt;/ developer &gt;</span>
-            </motion.div>
-
-            {/* 인사 + 이름 + 역할 */}
-            <motion.div
+          <div className="flex flex-col items-center gap-6 text-center max-w-2xl">
+            <motion.h1
               initial={{ opacity: 0, y: 22 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.35, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-              className="flex flex-col gap-2"
+              className="font-display text-[clamp(2rem,10vw,4.5rem)] font-bold text-silver-50 leading-[1.05] tracking-tight whitespace-nowrap drop-shadow-[0_0_14px_rgba(196,214,255,0.28)]"
             >
-              <p className="text-silver-300 text-lg font-display">안녕하세요,</p>
-              <h1 className="font-display text-5xl sm:text-6xl md:text-7xl font-bold text-silver-50 leading-tight tracking-tight">
-                {NAME}
-                <span className="text-moon-glow">.</span>
-              </h1>
-              <p className="font-display text-xl sm:text-2xl font-semibold text-gradient-midnight">
-                풀스택 개발자 · at midnight.
-              </p>
-            </motion.div>
+              Project Midnight
+            </motion.h1>
 
             {/* 소개 */}
             <motion.p
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.55, duration: 0.6 }}
-              className="text-silver-300 text-base max-w-md leading-relaxed"
+              className="text-silver-300 text-base max-w-xl leading-relaxed"
             >
-              소프트웨어 공학을 전공하며 자정에 가장 집중하는 개발자입니다.
-              깔끔한 코드와 좋은 사용자 경험을 추구합니다.
+              AI를 도구로 삼아 더 빠르게 실험하고,
+              <span className="mt-3 block text-sm text-silver-400">
+                더 정확하게 완성한다.
+              </span>
             </motion.p>
-
-            {/* CTA 버튼 */}
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7, duration: 0.6 }}
-              className="flex flex-wrap gap-3"
-            >
-              <Link
-                href="/projects"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-star-gold text-midnight-950 font-mono font-semibold text-sm rounded-xl shadow-gold-glow hover:bg-yellow-400 hover:shadow-[0_0_30px_rgba(255,215,0,0.6)] transition-all duration-200 active:scale-95"
-              >
-                View Projects
-                <ArrowRight size={15} />
-              </Link>
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-transparent border border-silver-300/30 text-silver-100 font-mono text-sm rounded-xl hover:border-silver-100/60 hover:bg-midnight-700 transition-all duration-200 active:scale-95"
-              >
-                Contact Me
-              </Link>
-            </motion.div>
-
-            {/* GitHub 링크 */}
-            <motion.a
-              href="https://github.com/highjump0603"
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.9, duration: 0.5 }}
-              className="inline-flex items-center gap-2 font-mono text-xs text-silver-400 hover:text-silver-100 transition-colors group"
-            >
-              <Github size={14} className="group-hover:text-moon-glow transition-colors" />
-              github.com/highjump0603
-            </motion.a>
           </div>
-
         </div>
       </div>
 
@@ -105,7 +44,7 @@ export default function HeroSection() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.3, duration: 0.5 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
       >
         <span className="font-mono text-xs text-silver-400">Scroll</span>
         <div className="w-px h-12 bg-gradient-to-b from-silver-400/50 to-transparent animate-[fade-in-up_2s_ease-in-out_infinite]" />

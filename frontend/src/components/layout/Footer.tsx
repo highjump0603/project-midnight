@@ -35,19 +35,12 @@ export default function Footer() {
           {/* Brand */}
           <div className="flex flex-col gap-4">
             <Link href="/" className="flex items-center gap-2.5 w-fit group">
-              <MoonIcon
-                size={24}
-                className="text-silver-100 group-hover:drop-shadow-[0_0_6px_rgba(123,123,255,0.7)] transition-all"
-              />
               <span className="font-mono text-sm text-silver-100">
                 <span className="text-moon-glow">&lt;</span>
                 {" Project Midnight "}
                 <span className="text-moon-glow">/&gt;</span>
               </span>
             </Link>
-            <p className="text-silver-300 text-sm leading-relaxed max-w-xs">
-              자정에 무언가를 만드는 소프트웨어 개발자.
-            </p>
           </div>
 
           {/* Navigation */}
