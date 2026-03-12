@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X, Moon } from "lucide-react";
+import { useSiteTransition } from "@/components/SiteTransitionProvider";
 
 const NAV_LINKS = [
   { href: "/projects", label: "Projects" },
@@ -16,6 +17,7 @@ const NAV_LINKS = [
 export default function HighjumpNavbar() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { trigger } = useSiteTransition();
 
   useEffect(() => {
     setMobileOpen(false);
@@ -54,13 +56,13 @@ export default function HighjumpNavbar() {
           </ul>
 
           <div className="hidden md:flex items-center">
-            <a
-              href="https://project-midnight.dev"
+            <button
+              onClick={() => trigger("https://project-midnight.dev", "midnight")}
               className="inline-flex items-center gap-1.5 px-3 py-1.5 font-mono text-xs text-white/40 border border-white/10 rounded-lg hover:text-white/80 hover:border-white/20 transition-all duration-200"
             >
               <Moon size={11} />
               midnight
-            </a>
+            </button>
           </div>
 
           {/* Mobile toggle */}
@@ -103,13 +105,13 @@ export default function HighjumpNavbar() {
                 );
               })}
               <div className="px-4 py-3 mt-1 border-t border-white/10">
-                <a
-                  href="https://project-midnight.dev"
+                <button
+                  onClick={() => trigger("https://project-midnight.dev", "midnight")}
                   className="inline-flex items-center gap-1.5 font-mono text-xs text-white/40 hover:text-white/80 transition-colors"
                 >
                   <Moon size={12} />
                   Switch to midnight
-                </a>
+                </button>
               </div>
             </div>
           </motion.div>

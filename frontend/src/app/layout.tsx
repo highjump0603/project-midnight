@@ -7,6 +7,7 @@ import HighjumpNavbar from "@/components/highjump/Navbar";
 import HighjumpFooter from "@/components/highjump/Footer";
 import PageWrapper from "@/components/layout/PageWrapper";
 import ThemeProvider from "@/components/ThemeProvider";
+import SiteTransitionProvider from "@/components/SiteTransitionProvider";
 import { SITE_NAME } from "@/lib/constants";
 import { createMetadata, siteUrl } from "@/lib/seo";
 import { getThemeFromHost } from "@/lib/theme";
@@ -73,13 +74,15 @@ export default async function RootLayout({
             : "bg-hj-bg text-hj-text min-h-screen flex flex-col"
         }
       >
-        <ThemeProvider theme={theme}>
-          {isMidnight ? <Navbar /> : <HighjumpNavbar />}
-          <PageWrapper>
-            <div className={`flex-1 ${isMidnight ? "pt-16" : "pt-14"}`}>{children}</div>
-          </PageWrapper>
-          {isMidnight ? <Footer /> : <HighjumpFooter />}
-        </ThemeProvider>
+        <SiteTransitionProvider>
+          <ThemeProvider theme={theme}>
+            {isMidnight ? <Navbar /> : <HighjumpNavbar />}
+            <PageWrapper>
+              <div className={`flex-1 ${isMidnight ? "pt-16" : "pt-14"}`}>{children}</div>
+            </PageWrapper>
+            {isMidnight ? <Footer /> : <HighjumpFooter />}
+          </ThemeProvider>
+        </SiteTransitionProvider>
       </body>
     </html>
   );

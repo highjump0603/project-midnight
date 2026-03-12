@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Github, ArrowUpRight } from "lucide-react";
+import { useSiteTransition } from "@/components/SiteTransitionProvider";
 
 const NAV_LINKS = [
   { href: "/projects", label: "Projects" },
@@ -17,6 +18,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { trigger } = useSiteTransition();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -92,13 +94,13 @@ export default function Navbar() {
             >
               <Github size={18} />
             </a>
-            <a
-              href="https://highjump.kr"
+            <button
+              onClick={() => trigger("https://highjump.kr", "highjump")}
               className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 font-mono text-xs text-silver-400 border border-midnight-600/40 rounded-lg hover:border-moon-glow/30 hover:text-silver-100 transition-all duration-200"
             >
               <ArrowUpRight size={12} />
               highjump
-            </a>
+            </button>
           </div>
 
           {/* Mobile toggle */}
@@ -158,13 +160,13 @@ export default function Navbar() {
               <motion.li
                 variants={{ open: { opacity: 1, y: 0 }, closed: { opacity: 0, y: 20 } }}
               >
-                <a
-                  href="https://highjump.kr"
+                <button
+                  onClick={() => trigger("https://highjump.kr", "highjump")}
                   className="inline-flex items-center gap-2 font-mono text-sm text-silver-400 hover:text-silver-100 transition-colors"
                 >
                   <ArrowUpRight size={14} />
                   highjump.kr
-                </a>
+                </button>
               </motion.li>
             </motion.ul>
           </motion.div>
