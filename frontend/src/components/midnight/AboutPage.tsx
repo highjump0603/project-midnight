@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { Code2, Cpu, Globe, BookOpen } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 
@@ -71,10 +72,14 @@ export default function MidnightAboutPage() {
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-8">
             {/* Avatar */}
             <div className="relative shrink-0">
-              <div className="w-24 h-24 rounded-2xl bg-midnight-800 border border-midnight-700/60 flex items-center justify-center overflow-hidden">
-                <span className="font-display text-3xl font-bold text-moon-glow/60 select-none">
-                  {NAME[0]}
-                </span>
+              <div className="w-24 h-24 rounded-2xl border border-midnight-700/60 overflow-hidden">
+                <Image
+                  src="/images/profile.jpg"
+                  alt={NAME}
+                  width={96}
+                  height={96}
+                  className="object-cover w-full h-full"
+                />
               </div>
               {/* Online dot */}
               <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-midnight-950 flex items-center justify-center">
