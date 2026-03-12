@@ -155,24 +155,30 @@ export default function MidnightAboutPage() {
                       className="mb-5"
                     />
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="relative pl-8">
+                      <div className="absolute left-2.5 top-1 bottom-1 w-px bg-gradient-to-b from-moon-glow/40 via-midnight-600/60 to-transparent" />
+                      <div className="space-y-5">
                       {items.map((item, i) => (
                         <motion.div
                           key={`${type}-${i}`}
-                          initial={{ opacity: 0, y: 10 }}
-                          animate={{ opacity: 1, y: 0 }}
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
                           transition={{ delay: 0.32 + i * 0.05, duration: 0.4 }}
-                          className="bg-glass rounded-xl p-5 border border-midnight-600/40 hover:border-moon-glow/25 transition-colors"
+                          className="relative"
                         >
-                          <div className="flex items-center gap-2 mb-2">
-                            <span className="font-mono text-xs px-2 py-0.5 rounded-full border border-moon-glow/20 bg-moon-glow/10 text-moon-glow">
-                              {item.year}
-                            </span>
+                          <div className="absolute -left-[1.45rem] top-2 w-2.5 h-2.5 rounded-full bg-moon-glow/70 border-2 border-midnight-950 shadow-[0_0_8px_rgba(123,123,255,0.5)]" />
+                          <div className="bg-glass rounded-xl p-5 border border-midnight-600/40 hover:border-moon-glow/25 transition-colors">
+                            <div className="flex items-center gap-2 mb-2">
+                              <span className="font-mono text-xs px-2 py-0.5 rounded-full border border-moon-glow/20 bg-moon-glow/10 text-moon-glow">
+                                {item.year}
+                              </span>
+                            </div>
+                            <h4 className="font-display font-semibold text-silver-50 mb-1">{item.title}</h4>
+                            <p className="text-silver-300 text-sm leading-relaxed">{item.description}</p>
                           </div>
-                          <h4 className="font-display font-semibold text-silver-50 mb-1">{item.title}</h4>
-                          <p className="text-silver-300 text-sm leading-relaxed">{item.description}</p>
                         </motion.div>
                       ))}
+                      </div>
                     </div>
                   </motion.div>
                 );
