@@ -13,6 +13,8 @@ class SiteSettings(Base):
         UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
     )
     social_links: Mapped[list] = mapped_column(JSONB, nullable=False, default=list)
+    tech_items: Mapped[list] = mapped_column(JSONB, nullable=False, server_default="'[]'::jsonb", default=list)
+    timeline_items: Mapped[list] = mapped_column(JSONB, nullable=False, server_default="'[]'::jsonb", default=list)
     updated_at: Mapped[datetime] = mapped_column(
         nullable=False, server_default=func.now(), onupdate=func.now()
     )

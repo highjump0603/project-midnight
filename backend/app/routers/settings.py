@@ -14,7 +14,7 @@ async def get_settings(db: AsyncSession = Depends(get_db)):
     result = await db.execute(select(SiteSettings))
     row = result.scalar_one_or_none()
     if not row:
-        return SiteSettingsOut(social_links=[])
+        return SiteSettingsOut(social_links=[], tech_items=[], timeline_items=[])
     return row
 
 
@@ -27,10 +27,19 @@ async def update_settings(
     result = await db.execute(select(SiteSettings))
     row = result.scalar_one_or_none()
     if not row:
-        row = SiteSettings(social_links=[link.model_dump() for link in data.social_links])
+        row = SiteSettings(
+            social_links=[l.model_dump() for l in (data.social_links or [])],
+            tech_items=[t.model_dump() for t in (data.tech_items or [])],
+            timeline_items=[t.model_dump() for t in (data.timeline_items or [])],
+        )
         db.add(row)
     else:
-        row.social_links = [link.model_dump() for link in data.social_links]
+        if data.social_links is not None:
+            row.social_links = [l.model_dump() for l in data.social_links]
+        if data.tech_items is not None:
+            row.tech_items = [t.model_dump() for t in data.tech_items]
+        if data.timeline_items is not None:
+            row.timeline_items = [t.model_dump() for t in data.timeline_items]
     await db.flush()
     await db.refresh(row)
     return row

@@ -96,8 +96,26 @@ export interface SocialLink {
   icon: string;
 }
 
+export interface TechItem {
+  name: string;
+  icon_key: string;
+  color: string;
+  category: string;
+  proficiency: number;
+  duration: string;
+}
+
+export interface TimelineItem {
+  year: string;
+  title: string;
+  description: string;
+  type: string;
+}
+
 export interface SiteSettings {
   social_links: SocialLink[];
+  tech_items: TechItem[];
+  timeline_items: TimelineItem[];
 }
 
 export async function getSettings(): Promise<SiteSettings> {

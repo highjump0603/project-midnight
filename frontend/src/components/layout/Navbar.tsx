@@ -85,15 +85,6 @@ export default function Navbar() {
 
           {/* GitHub link */}
           <div className="hidden md:flex items-center gap-2">
-            <a
-              href="https://github.com/highjump0603"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center text-silver-300 hover:text-silver-50 transition-colors p-2"
-              aria-label="GitHub"
-            >
-              <Github size={18} />
-            </a>
             <button
               onClick={() => trigger("https://highjump.kr", "highjump")}
               className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 font-mono text-xs text-silver-400 border border-midnight-600/40 rounded-lg hover:border-moon-glow/30 hover:text-silver-100 transition-all duration-200"
