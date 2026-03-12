@@ -42,13 +42,13 @@ export async function getProjects(params?: {
 
   const qs = query.toString() ? `?${query}` : "";
   return apiFetch<ProjectListResponse>(`/projects${qs}`, {
-    next: { revalidate: 3600 },
+    cache: "no-store",
   });
 }
 
 export async function getProject(slug: string): Promise<Project> {
   return apiFetch<Project>(`/projects/${slug}`, {
-    next: { revalidate: 3600 },
+    cache: "no-store",
   });
 }
 
@@ -66,13 +66,13 @@ export async function getBlogPosts(params?: {
 
   const qs = query.toString() ? `?${query}` : "";
   return apiFetch<BlogListResponse>(`/blog${qs}`, {
-    next: { revalidate: 1800 },
+    cache: "no-store",
   });
 }
 
 export async function getBlogPost(slug: string): Promise<BlogPost> {
   return apiFetch<BlogPost>(`/blog/${slug}`, {
-    next: { revalidate: 1800 },
+    cache: "no-store",
   });
 }
 
