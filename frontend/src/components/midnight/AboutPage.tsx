@@ -130,14 +130,6 @@ export default function MidnightAboutPage() {
         {/* 이력 카테고리 */}
         {timelineItems.length > 0 && (
           <motion.section {...fadeUp} transition={{ duration: 0.6, delay: 0.2 }} className="mb-20">
-            <div className="mb-8">
-              <SectionHeading
-                label="// history"
-                title="이력"
-                description="카테고리별로 정리한 주요 이력입니다."
-              />
-            </div>
-
             <div className="space-y-12">
               {historyTypes.map((type, typeIndex) => {
                 const items = timelineItems.filter((item) => item.type === type);
@@ -150,7 +142,6 @@ export default function MidnightAboutPage() {
                     className="rounded-2xl border border-midnight-700/50 bg-midnight-900/35 p-5 sm:p-6"
                   >
                     <SectionHeading
-                      label="// category"
                       title={type}
                       className="mb-5"
                     />
@@ -191,22 +182,6 @@ export default function MidnightAboutPage() {
         {techItems.length > 0 && (
           <motion.section {...fadeUp} transition={{ duration: 0.6, delay: 0.3 }} className="mb-20">
             <SectionHeading label="// tools" title="기술 스택" className="mb-8" />
-
-            <div className="flex flex-wrap items-center gap-4 mb-8 p-3 bg-midnight-900/40 rounded-xl border border-midnight-700/40">
-              <span className="font-mono text-[10px] text-silver-500">숙련도</span>
-              {[
-                { label: "80%+ 숙련", color: "bg-moon-glow" },
-                { label: "60%+ 능숙", color: "bg-star-blue" },
-                { label: "40%+ 기초", color: "bg-silver-400" },
-                { label: "학습 중", color: "bg-purple-400" },
-              ].map(({ label, color }) => (
-                <div key={label} className="flex items-center gap-1.5">
-                  <div className={`w-2.5 h-2.5 rounded-full ${color}`} />
-                  <span className="font-mono text-[10px] text-silver-500">{label}</span>
-                </div>
-              ))}
-            </div>
-
             <div className="space-y-8">
               {categories.map((cat) => {
                 const items = techItems.filter((t) => t.category === cat);
