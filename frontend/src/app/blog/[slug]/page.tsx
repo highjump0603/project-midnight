@@ -67,10 +67,10 @@ export default async function BlogPostPage({
           {/* Back */}
           <Link
             href="/blog"
-            className="inline-flex items-center gap-1.5 font-mono text-sm text-silver-300 hover:text-silver-50 transition-colors mb-10"
+            className="inline-flex items-center gap-1.5 font-mono text-sm text-silver-400 hover:text-silver-50 transition-colors mb-10"
           >
             <ArrowLeft size={14} />
-            All Posts
+            블로그 목록
           </Link>
 
           {/* Header */}
@@ -107,7 +107,7 @@ export default async function BlogPostPage({
               )}
               <span className="inline-flex items-center gap-1.5 font-mono text-xs text-silver-400">
                 <Clock size={12} />
-                {post.reading_time} min read
+                {post.reading_time}분 읽기
               </span>
             </div>
           </header>

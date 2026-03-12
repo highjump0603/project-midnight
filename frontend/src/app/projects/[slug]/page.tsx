@@ -64,10 +64,10 @@ export default async function ProjectDetailPage({
         {/* Back */}
         <Link
           href="/projects"
-          className="inline-flex items-center gap-1.5 font-mono text-sm text-silver-300 hover:text-silver-50 transition-colors mb-10"
+          className="inline-flex items-center gap-1.5 font-mono text-sm text-silver-400 hover:text-silver-50 transition-colors mb-10"
         >
           <ArrowLeft size={14} />
-          All Projects
+          프로젝트 목록
         </Link>
 
         {/* Cover */}
@@ -101,10 +101,10 @@ export default async function ProjectDetailPage({
                 href={project.demo_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-2.5 bg-star-gold text-midnight-950 font-mono font-semibold text-sm rounded-lg shadow-gold-glow hover:bg-yellow-400 transition-all active:scale-95"
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-moon-glow/15 border border-moon-glow/40 text-moon-glow font-mono font-semibold text-sm rounded-xl hover:bg-moon-glow/25 transition-all active:scale-95"
               >
                 <ExternalLink size={14} />
-                Live Demo
+                라이브 데모
               </a>
             )}
             {project.repo_url && (
@@ -112,10 +112,10 @@ export default async function ProjectDetailPage({
                 href={project.repo_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-2.5 bg-midnight-700 border border-midnight-600 text-silver-100 font-mono text-sm rounded-lg hover:border-silver-300/40 transition-all active:scale-95"
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-midnight-800 border border-midnight-600 text-silver-200 font-mono text-sm rounded-xl hover:border-silver-400/40 hover:text-silver-50 transition-all active:scale-95"
               >
                 <Github size={14} />
-                Source Code
+                소스 코드
               </a>
             )}
           </div>
@@ -123,8 +123,8 @@ export default async function ProjectDetailPage({
           {/* Tech stack */}
           {project.tech_tags.length > 0 && (
             <div className="flex flex-col gap-2">
-              <span className="font-mono text-xs text-silver-400 uppercase tracking-widest">
-                Tech Stack
+              <span className="font-mono text-[10px] text-silver-500 uppercase tracking-widest">
+                기술 스택
               </span>
               <div className="flex flex-wrap gap-2">
                 {project.tech_tags.map((tag) => (
