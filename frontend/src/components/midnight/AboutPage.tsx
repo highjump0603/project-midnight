@@ -68,39 +68,51 @@ export default function MidnightAboutPage() {
       <div className="section-container max-w-4xl">
 
         <motion.section {...fadeUp} transition={{ duration: 0.6, delay: 0.1 }} className="mb-20">
-          <div className="flex flex-col gap-4">
-            <div>
-              <p className="font-mono text-sm text-star-blue mb-1">// about me</p>
-              <h1 className="font-display text-4xl sm:text-5xl font-bold text-silver-50">
-                {NAME}
-                <span className="text-moon-glow">.</span>
-              </h1>
-              <p className="font-display text-lg text-silver-300 mt-1">
-                소프트웨어 공학과 · 풀스택 개발자
-              </p>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-8">
+            {/* Avatar */}
+            <div className="relative shrink-0">
+              <div className="w-24 h-24 rounded-2xl bg-midnight-800 border border-midnight-700/60 flex items-center justify-center overflow-hidden">
+                <span className="font-display text-3xl font-bold text-moon-glow/60 select-none">
+                  {NAME[0]}
+                </span>
+              </div>
+              {/* Online dot */}
+              <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-midnight-950 flex items-center justify-center">
+                <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)]" />
+              </div>
             </div>
-            <p className="text-silver-200 leading-relaxed text-base max-w-md">
-              자정에 가장 집중하는 개발자입니다. 깔끔한 코드, 좋은 아키텍처, 그리고
-              사용자 경험에 깊은 관심을 가지고 있으며 소프트웨어로 문제를 해결하는 것을
-              즐깁니다.
-            </p>
-            <div className="flex items-center gap-3">
-              <a
-                href="https://github.com/highjump0603"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 bg-midnight-800 border border-midnight-600/60 hover:border-moon-glow/40 text-silver-200 hover:text-silver-50 font-mono text-sm rounded-lg transition-all duration-200"
-              >
-                <Github size={14} />
-                GitHub
-              </a>
-              <a
-                href="mailto:hello@project-midnight.dev"
-                className="inline-flex items-center gap-2 px-4 py-2 bg-midnight-800 border border-midnight-600/60 hover:border-star-blue/40 text-silver-200 hover:text-silver-50 font-mono text-sm rounded-lg transition-all duration-200"
-              >
-                <Mail size={14} />
-                Email
-              </a>
+
+            {/* Info */}
+            <div className="flex flex-col gap-3">
+              <div>
+                <span className="font-mono text-xs text-moon-glow/70 mb-2 block">// about me</span>
+                <h1 className="font-display text-4xl sm:text-5xl font-bold text-silver-50 leading-tight">
+                  {NAME}
+                </h1>
+                <p className="font-mono text-sm text-silver-400 mt-1.5">
+                  소프트웨어 공학과 · 풀스택 개발자
+                </p>
+              </div>
+
+              {/* Social links */}
+              <div className="flex items-center gap-2 mt-1">
+                <a
+                  href="https://github.com/highjump0603"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 font-mono text-xs text-silver-500 hover:text-silver-100 bg-midnight-800/60 hover:bg-midnight-800 border border-midnight-700/50 hover:border-midnight-600 px-3 py-1.5 rounded-lg transition-all duration-200"
+                >
+                  <Github size={12} />
+                  GitHub
+                </a>
+                <a
+                  href="mailto:hello@project-midnight.dev"
+                  className="flex items-center gap-1.5 font-mono text-xs text-silver-500 hover:text-silver-100 bg-midnight-800/60 hover:bg-midnight-800 border border-midnight-700/50 hover:border-midnight-600 px-3 py-1.5 rounded-lg transition-all duration-200"
+                >
+                  <Mail size={12} />
+                  Email
+                </a>
+              </div>
             </div>
           </div>
         </motion.section>
