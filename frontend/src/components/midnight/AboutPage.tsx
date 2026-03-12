@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Code2, Cpu, Globe, BookOpen, User } from "lucide-react";
+import { User } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 
 const NAME = "송윤찬";
@@ -61,28 +61,6 @@ const TIMELINE = [
   },
 ];
 
-const VALUES = [
-  {
-    icon: Code2,
-    title: "Clean Code",
-    description: "Writing code that reads like prose — clear, purposeful, and easy to maintain.",
-  },
-  {
-    icon: Cpu,
-    title: "Deep Understanding",
-    description: "Going beyond surface-level. Understanding how things work under the hood.",
-  },
-  {
-    icon: Globe,
-    title: "Full Stack Thinking",
-    description: "Seeing the whole picture — from database schema to pixel-perfect UI.",
-  },
-  {
-    icon: BookOpen,
-    title: "Continuous Learning",
-    description: "Software evolves fast. Staying curious and building in public.",
-  },
-];
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -245,30 +223,6 @@ export default function MidnightAboutPage() {
           </div>
         </motion.section>
 
-        <motion.section {...fadeUp} transition={{ duration: 0.6, delay: 0.4 }}>
-          <SectionHeading label="// philosophy" title="How I Work" className="mb-8" />
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-            {VALUES.map(({ icon: Icon, title, description }, i) => (
-              <motion.div
-                key={title}
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 + i * 0.08, duration: 0.5 }}
-                className="bg-glass rounded-xl p-6 border border-midnight-600/40 hover:border-moon-glow/20 transition-colors"
-              >
-                <div className="flex items-start gap-4">
-                  <div className="w-9 h-9 rounded-lg bg-midnight-700 border border-midnight-600 flex items-center justify-center shrink-0 mt-0.5">
-                    <Icon size={16} className="text-star-blue" />
-                  </div>
-                  <div>
-                    <h3 className="font-display font-semibold text-silver-50 mb-1.5">{title}</h3>
-                    <p className="text-silver-300 text-sm leading-relaxed">{description}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.section>
 
       </div>
     </main>
