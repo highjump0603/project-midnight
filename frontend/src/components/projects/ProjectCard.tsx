@@ -1,9 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { ExternalLink, Github, ArrowRight } from "lucide-react";
+import { ExternalLink, Github } from "lucide-react";
 import type { Project } from "@/types/project";
 import TechBadge from "./TechBadge";
 
@@ -12,11 +12,26 @@ interface ProjectCardProps {
 }
 
 export default function ProjectCard({ project }: ProjectCardProps) {
+  const router = useRouter();
+
+  const openProjectDetail = () => {
+    router.push(`/projects/${project.slug}`);
+  };
+
   return (
     <motion.div
       whileHover={{ y: -4, scale: 1.01 }}
       transition={{ duration: 0.2, ease: "easeOut" }}
-      className="group relative bg-glass rounded-2xl overflow-hidden border border-midnight-600/40 hover:border-moon-glow/40 shadow-card hover:shadow-card-hover transition-all duration-300 flex flex-col"
+      className="group relative bg-glass rounded-2xl overflow-hidden border border-midnight-600/40 hover:border-moon-glow/40 shadow-card hover:shadow-card-hover transition-all duration-300 flex flex-col cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-star-blue/50"
+      role="link"
+      tabIndex={0}
+      onClick={openProjectDetail}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          openProjectDetail();
+        }
+      }}
     >
       {/* Hover glow border */}
       <div className="absolute inset-0 rounded-2xl border border-moon-glow/0 group-hover:border-moon-glow/25 transition-colors duration-300 pointer-events-none z-10" />
@@ -65,15 +80,8 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           </div>
         )}
 
-        {/* Footer links */}
-        <div className="mt-auto pt-2 flex items-center justify-between gap-2">
-          <Link
-            href={`/projects/${project.slug}`}
-            className="inline-flex items-center gap-1.5 font-mono text-xs text-silver-300 hover:text-star-blue transition-colors"
-          >
-            View Details
-            <ArrowRight size={12} />
-          </Link>
+        {/* External links */}
+        <div className="mt-auto pt-2 flex items-center justify-end gap-2">
           <div className="flex items-center gap-3">
             {project.repo_url && (
               <a
@@ -82,6 +90,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                 rel="noopener noreferrer"
                 className="text-silver-400 hover:text-silver-50 transition-colors"
                 aria-label="GitHub repository"
+                onClick={(e) => e.stopPropagation()}
               >
                 <Github size={15} />
               </a>
@@ -93,6 +102,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                 rel="noopener noreferrer"
                 className="text-silver-400 hover:text-star-blue transition-colors"
                 aria-label="Live demo"
+                onClick={(e) => e.stopPropagation()}
               >
                 <ExternalLink size={15} />
               </a>
