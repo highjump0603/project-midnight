@@ -86,6 +86,7 @@ function SaveBtn({ onClick, saving, saved }: { onClick: () => void; saving: bool
 export default function SettingsPage() {
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<SettingsTab>("links");
+  const [activeHistoryType, setActiveHistoryType] = useState(TIMELINE_TYPES[0]);
 
   // Social links
   const [links, setLinks] = useState<SocialLink[]>([]);
@@ -168,11 +169,29 @@ export default function SettingsPage() {
   // ── Timeline handlers ──
 
   const addTimeline = () =>
-    setTimeline([...timeline, { year: "", title: "", description: "", type: "학업" }]);
+    setTimeline([...timeline, { year: "", title: "", description: "", type: activeHistoryType }]);
   const removeTimeline = (i: number) => setTimeline(timeline.filter((_, idx) => idx !== i));
   const updateTimeline = <K extends keyof TimelineItem>(i: number, field: K, value: TimelineItem[K]) =>
     setTimeline(timeline.map((t, idx) => (idx === i ? { ...t, [field]: value } : t)));
   const moveTimeline = (i: number, dir: -1 | 1) => setTimeline(move(timeline, i, dir));
+
+  const moveTimelineWithinType = (i: number, dir: -1 | 1) => {
+    const indices = timeline
+      .map((item, idx) => ({ item, idx }))
+      .filter(({ item }) => item.type === activeHistoryType)
+      .map(({ idx }) => idx);
+
+    const pos = indices.indexOf(i);
+    const nextPos = pos + dir;
+    if (pos < 0 || nextPos < 0 || nextPos >= indices.length) return;
+
+    const j = indices[nextPos];
+    setTimeline((prev) => {
+      const next = [...prev];
+      [next[i], next[j]] = [next[j], next[i]];
+      return next;
+    });
+  };
 
   const saveTimeline = async () => {
     setSavingTimeline(true);
@@ -432,16 +451,38 @@ export default function SettingsPage() {
           <SaveBtn onClick={saveTimeline} saving={savingTimeline} saved={savedTimeline} />
         </div>
 
+        <div className="mb-4 flex flex-wrap gap-2 rounded-xl border border-midnight-700/60 bg-midnight-900/40 p-2">
+          {TIMELINE_TYPES.map((type) => {
+            const count = timeline.filter((item) => item.type === type).length;
+            return (
+              <button
+                key={type}
+                onClick={() => setActiveHistoryType(type)}
+                className={`rounded-lg px-3 py-1.5 font-mono text-xs transition-colors ${
+                  activeHistoryType === type
+                    ? "bg-midnight-800 text-moon-glow"
+                    : "text-silver-500 hover:bg-midnight-800/50 hover:text-silver-200"
+                }`}
+              >
+                {type} ({count})
+              </button>
+            );
+          })}
+        </div>
+
         <div className="space-y-3">
-          {timeline.map((item, i) => (
+          {timeline
+            .map((item, i) => ({ item, i }))
+            .filter(({ item }) => item.type === activeHistoryType)
+            .map(({ item, i }) => (
             <div key={i} className="p-4 bg-midnight-800/60 rounded-xl border border-midnight-700/50 space-y-3">
               {/* Row 1: reorder + year + type + delete */}
               <div className="flex items-center gap-3">
                 <div className="flex flex-col gap-0.5 shrink-0">
-                  <button onClick={() => moveTimeline(i, -1)} className="p-0.5 text-silver-600 hover:text-silver-300 transition-colors">
+                  <button onClick={() => moveTimelineWithinType(i, -1)} className="p-0.5 text-silver-600 hover:text-silver-300 transition-colors">
                     <ChevronUp size={13} />
                   </button>
-                  <button onClick={() => moveTimeline(i, 1)} className="p-0.5 text-silver-600 hover:text-silver-300 transition-colors">
+                  <button onClick={() => moveTimelineWithinType(i, 1)} className="p-0.5 text-silver-600 hover:text-silver-300 transition-colors">
                     <ChevronDown size={13} />
                   </button>
                 </div>
@@ -493,7 +534,7 @@ export default function SettingsPage() {
           onClick={addTimeline}
           className="mt-3 flex items-center gap-2 font-mono text-xs text-silver-400 hover:text-silver-200 transition-colors px-3 py-2 rounded-xl border border-dashed border-midnight-600/60 hover:border-midnight-500/60 w-full justify-center"
         >
-          <Plus size={13} />항목 추가
+          <Plus size={13} />{activeHistoryType} 항목 추가
         </button>
       </div>
       )}
