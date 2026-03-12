@@ -95,6 +95,9 @@ export default function MidnightAboutPage() {
   // Group tech items by category (preserve insertion order)
   const categories = Array.from(new Set(techItems.map((t) => t.category)));
 
+  // Group history items by type (preserve insertion order)
+  const historyTypes = Array.from(new Set(timelineItems.map((item) => item.type)));
+
   return (
     <main className="section-padding">
       <div className="section-container max-w-4xl">
@@ -124,35 +127,56 @@ export default function MidnightAboutPage() {
           </div>
         </motion.section>
 
-        {/* 타임라인 */}
+        {/* 이력 카테고리 */}
         {timelineItems.length > 0 && (
           <motion.section {...fadeUp} transition={{ duration: 0.6, delay: 0.2 }} className="mb-20">
-            <SectionHeading label="// history" title="타임라인" className="mb-10" />
-            <div className="relative pl-8">
-              <div className="absolute left-2.5 top-0 bottom-0 w-px bg-gradient-to-b from-moon-glow/40 via-midnight-600/60 to-transparent" />
-              <div className="flex flex-col gap-8">
-                {timelineItems.map((item, i) => (
+            <div className="mb-8">
+              <SectionHeading
+                label="// history"
+                title="이력"
+                description="카테고리별로 정리한 주요 이력입니다."
+              />
+            </div>
+
+            <div className="space-y-12">
+              {historyTypes.map((type, typeIndex) => {
+                const items = timelineItems.filter((item) => item.type === type);
+                return (
                   <motion.div
-                    key={i}
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.3 + i * 0.1, duration: 0.5 }}
-                    className="relative"
+                    key={type}
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.28 + typeIndex * 0.08, duration: 0.45 }}
+                    className="rounded-2xl border border-midnight-700/50 bg-midnight-900/35 p-5 sm:p-6"
                   >
-                    <div className="absolute -left-[1.45rem] top-1.5 w-2.5 h-2.5 rounded-full bg-moon-glow/70 border-2 border-midnight-950 shadow-[0_0_8px_rgba(123,123,255,0.5)]" />
-                    <div className="bg-glass rounded-xl p-5 border border-midnight-600/40 hover:border-moon-glow/20 transition-colors">
-                      <div className="flex items-center gap-3 mb-2">
-                        <span className="font-mono text-xs text-moon-glow">{item.year}</span>
-                        <span className={`font-mono text-xs px-2 py-0.5 rounded-full border ${TYPE_STYLE[item.type] ?? "bg-midnight-700 text-silver-400 border-midnight-600"}`}>
-                          {item.type}
-                        </span>
-                      </div>
-                      <h3 className="font-display font-semibold text-silver-50 mb-1">{item.title}</h3>
-                      <p className="text-silver-300 text-sm leading-relaxed">{item.description}</p>
+                    <SectionHeading
+                      label="// category"
+                      title={type}
+                      className="mb-5"
+                    />
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      {items.map((item, i) => (
+                        <motion.div
+                          key={`${type}-${i}`}
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.32 + i * 0.05, duration: 0.4 }}
+                          className="bg-glass rounded-xl p-5 border border-midnight-600/40 hover:border-moon-glow/25 transition-colors"
+                        >
+                          <div className="flex items-center gap-2 mb-2">
+                            <span className="font-mono text-xs px-2 py-0.5 rounded-full border border-moon-glow/20 bg-moon-glow/10 text-moon-glow">
+                              {item.year}
+                            </span>
+                          </div>
+                          <h4 className="font-display font-semibold text-silver-50 mb-1">{item.title}</h4>
+                          <p className="text-silver-300 text-sm leading-relaxed">{item.description}</p>
+                        </motion.div>
+                      ))}
                     </div>
                   </motion.div>
-                ))}
-              </div>
+                );
+              })}
             </div>
           </motion.section>
         )}

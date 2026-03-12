@@ -19,6 +19,8 @@ interface TimelineItem {
   year: string; title: string; description: string; type: string;
 }
 
+type SettingsTab = "links" | "tech" | "history";
+
 // ── Constants ────────────────────────────────────────────────────────────────
 
 const ICON_OPTIONS = [
@@ -34,6 +36,12 @@ const ICON_OPTIONS = [
 const TIMELINE_TYPES = ["학업", "경력", "프로젝트", "대외활동", "수상"];
 
 const CATEGORY_OPTIONS = ["Frontend", "Backend", "DevOps", "Language", "기타"];
+
+const SETTINGS_TABS: Array<{ key: SettingsTab; label: string }> = [
+  { key: "links", label: "소셜 링크" },
+  { key: "tech", label: "기술 스택" },
+  { key: "history", label: "이력 카테고리" },
+];
 
 const DEFAULT_COLORS: Record<string, string> = {
   python: "#3776AB", react: "#61DAFB", typescript: "#3178C6",
@@ -77,6 +85,7 @@ function SaveBtn({ onClick, saving, saved }: { onClick: () => void; saving: bool
 
 export default function SettingsPage() {
   const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState<SettingsTab>("links");
 
   // Social links
   const [links, setLinks] = useState<SocialLink[]>([]);
@@ -102,6 +111,21 @@ export default function SettingsPage() {
       })
       .finally(() => setLoading(false));
   }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const hash = window.location.hash.replace("#", "");
+    if (hash === "links" || hash === "tech" || hash === "history") {
+      setActiveTab(hash);
+    }
+  }, []);
+
+  const selectTab = (tab: SettingsTab) => {
+    setActiveTab(tab);
+    if (typeof window !== "undefined") {
+      window.history.replaceState(null, "", `#${tab}`);
+    }
+  };
 
   // ── Social links handlers ──
 
@@ -172,7 +196,7 @@ export default function SettingsPage() {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center gap-3">
         <div className="p-2 rounded-xl bg-moon-glow/10 border border-moon-glow/20">
@@ -180,12 +204,46 @@ export default function SettingsPage() {
         </div>
         <div>
           <h1 className="font-display text-2xl font-bold text-silver-50">사이트 설정</h1>
-          <p className="font-mono text-xs text-silver-500 mt-0.5">소셜 링크 · 기술 스택 · 타임라인</p>
+          <p className="font-mono text-xs text-silver-500 mt-0.5">소셜 링크 · 기술 스택 · 이력 카테고리</p>
         </div>
       </div>
 
+      {/* Summary */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div className="rounded-xl border border-midnight-700/60 bg-midnight-900/40 p-4">
+          <p className="font-mono text-[11px] text-silver-500">소셜 링크</p>
+          <p className="font-mono text-xl text-silver-100 mt-1">{links.length}</p>
+        </div>
+        <div className="rounded-xl border border-midnight-700/60 bg-midnight-900/40 p-4">
+          <p className="font-mono text-[11px] text-silver-500">기술 항목</p>
+          <p className="font-mono text-xl text-silver-100 mt-1">{techItems.length}</p>
+        </div>
+        <div className="rounded-xl border border-midnight-700/60 bg-midnight-900/40 p-4">
+          <p className="font-mono text-[11px] text-silver-500">이력 항목</p>
+          <p className="font-mono text-xl text-silver-100 mt-1">{timeline.length}</p>
+        </div>
+      </div>
+
+      {/* Tabs */}
+      <div className="flex flex-wrap gap-2 rounded-xl border border-midnight-700/60 bg-midnight-900/35 p-2">
+        {SETTINGS_TABS.map((tab) => (
+          <button
+            key={tab.key}
+            onClick={() => selectTab(tab.key)}
+            className={`rounded-lg px-3 py-1.5 font-mono text-xs transition-colors ${
+              activeTab === tab.key
+                ? "bg-midnight-800 text-moon-glow"
+                : "text-silver-500 hover:bg-midnight-800/50 hover:text-silver-200"
+            }`}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </div>
+
       {/* ── Social Links ─────────────────────────────────────────────────── */}
-      <div className="bg-midnight-900/50 rounded-2xl border border-midnight-700/60 p-6">
+      {activeTab === "links" && (
+      <div id="links" className="bg-midnight-900/50 rounded-2xl border border-midnight-700/60 p-6">
         <div className="flex items-center justify-between mb-5">
           <div className="flex items-center gap-2">
             <LinkIcon size={14} className="text-moon-glow" />
@@ -233,9 +291,11 @@ export default function SettingsPage() {
           <Plus size={13} />링크 추가
         </button>
       </div>
+      )}
 
       {/* ── Tech Stack ───────────────────────────────────────────────────── */}
-      <div className="bg-midnight-900/50 rounded-2xl border border-midnight-700/60 p-6">
+      {activeTab === "tech" && (
+      <div id="tech" className="bg-midnight-900/50 rounded-2xl border border-midnight-700/60 p-6">
         <div className="flex items-center justify-between mb-5">
           <div className="flex items-center gap-2">
             <Code2 size={14} className="text-star-blue" />
@@ -358,13 +418,15 @@ export default function SettingsPage() {
           <Plus size={13} />기술 추가
         </button>
       </div>
+      )}
 
       {/* ── Timeline ─────────────────────────────────────────────────────── */}
-      <div className="bg-midnight-900/50 rounded-2xl border border-midnight-700/60 p-6">
+      {activeTab === "history" && (
+      <div id="history" className="bg-midnight-900/50 rounded-2xl border border-midnight-700/60 p-6">
         <div className="flex items-center justify-between mb-5">
           <div className="flex items-center gap-2">
             <Clock size={14} className="text-emerald-400" />
-            <h2 className="font-mono text-sm font-semibold text-silver-200">타임라인</h2>
+            <h2 className="font-mono text-sm font-semibold text-silver-200">이력 카테고리</h2>
             <span className="font-mono text-xs text-silver-500">— About 페이지에 표시됩니다</span>
           </div>
           <SaveBtn onClick={saveTimeline} saving={savingTimeline} saved={savedTimeline} />
@@ -434,6 +496,7 @@ export default function SettingsPage() {
           <Plus size={13} />항목 추가
         </button>
       </div>
+      )}
     </div>
   );
 }
