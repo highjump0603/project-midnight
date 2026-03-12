@@ -63,7 +63,7 @@ export default function EditProjectPage() {
   }
 
   return (
-    <div className="max-w-3xl">
+    <div className="max-w-3xl mx-auto">
       {/* 헤더 */}
       <div className="flex items-center gap-3 mb-8">
         <button
