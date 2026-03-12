@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Github, Mail, Code2, Cpu, Globe, BookOpen } from "lucide-react";
+import { Code2, Cpu, Globe, BookOpen } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 
 const NAME = "송윤찬";
@@ -94,25 +94,6 @@ export default function MidnightAboutPage() {
                 </p>
               </div>
 
-              {/* Social links */}
-              <div className="flex items-center gap-2 mt-1">
-                <a
-                  href="https://github.com/highjump0603"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 font-mono text-xs text-silver-500 hover:text-silver-100 bg-midnight-800/60 hover:bg-midnight-800 border border-midnight-700/50 hover:border-midnight-600 px-3 py-1.5 rounded-lg transition-all duration-200"
-                >
-                  <Github size={12} />
-                  GitHub
-                </a>
-                <a
-                  href="mailto:hello@project-midnight.dev"
-                  className="flex items-center gap-1.5 font-mono text-xs text-silver-500 hover:text-silver-100 bg-midnight-800/60 hover:bg-midnight-800 border border-midnight-700/50 hover:border-midnight-600 px-3 py-1.5 rounded-lg transition-all duration-200"
-                >
-                  <Mail size={12} />
-                  Email
-                </a>
-              </div>
             </div>
           </div>
         </motion.section>
