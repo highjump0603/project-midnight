@@ -40,7 +40,6 @@ export default async function BlogPage() {
           <SectionHeading
             label="// blog"
             title="블로그"
-            description="소프트웨어 개발, 아키텍처, 그리고 배운 것들을 기록합니다."
           />
           {posts.length > 0 && (
             <span className="font-mono text-xs text-silver-500 shrink-0 pb-1">

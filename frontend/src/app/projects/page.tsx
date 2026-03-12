@@ -40,7 +40,6 @@ export default async function ProjectsPage() {
           <SectionHeading
             label="// projects"
             title="프로젝트"
-            description="직접 만든 사이드 프로젝트, 오픈소스 기여, 그리고 실험들."
           />
           {projects.length > 0 && (
             <span className="font-mono text-xs text-silver-500 shrink-0 pb-1">
