@@ -76,9 +76,10 @@ export default function MidnightAboutPage() {
                 <Image
                   src="/images/profile.jpg"
                   alt={NAME}
-                  width={96}
-                  height={96}
+                  width={192}
+                  height={192}
                   className="object-cover w-full h-full"
+                  quality={100}
                 />
               </div>
               {/* Online dot */}
