@@ -1,18 +1,9 @@
 import Link from "next/link";
 import { ArrowUpRight, Clock } from "lucide-react";
-import { getBlogPosts } from "@/lib/api";
 import type { BlogPost } from "@/types/blog";
 import { formatDateShort } from "@/lib/utils";
 
-export default async function HjLatestPosts() {
-  let posts: BlogPost[] = [];
-  try {
-    const res = await getBlogPosts({ limit: 4 });
-    posts = res.items;
-  } catch {
-    // Backend not running
-  }
-
+export default function HjLatestPosts({ posts }: { posts: BlogPost[] }) {
   return (
     <section className="bg-hj-bg border-t border-hj-border">
       <div className="section-container py-20">

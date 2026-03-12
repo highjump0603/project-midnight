@@ -1,17 +1,8 @@
 import Link from "next/link";
 import { ArrowUpRight, Github, ExternalLink } from "lucide-react";
-import { getProjects } from "@/lib/api";
 import type { Project } from "@/types/project";
 
-export default async function HjFeaturedProjects() {
-  let projects: Project[] = [];
-  try {
-    const res = await getProjects({ featured: true, limit: 4 });
-    projects = res.items;
-  } catch {
-    // Backend not running
-  }
-
+export default function HjFeaturedProjects({ projects }: { projects: Project[] }) {
   return (
     <section className="bg-white border-t border-hj-border">
       <div className="section-container py-20">
