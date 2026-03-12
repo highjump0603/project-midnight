@@ -3,7 +3,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.config import settings
 from app.database import engine, Base
-from app.routers import auth, projects, blog, contact, stats, settings
+from app.routers import auth, projects, blog, contact, stats
+from app.routers import settings as settings_router
 
 
 @asynccontextmanager
@@ -42,7 +43,7 @@ app.include_router(projects.router)
 app.include_router(blog.router)
 app.include_router(contact.router)
 app.include_router(stats.router)
-app.include_router(settings.router)
+app.include_router(settings_router.router)
 
 
 @app.get("/api/health")
