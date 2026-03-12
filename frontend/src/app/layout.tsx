@@ -20,9 +20,9 @@ export const metadata: Metadata = {
     template: `%s | ${SITE_NAME}`,
   },
   icons: {
-    icon: [{ url: "/icons/favicon.png", type: "image/svg+xml" }],
+    icon: [{ url: "/icons/favicon.png", type: "image/png" }],
     shortcut: ["/icons/favicon.png"],
-    apple: [{ url: "/icons/favicon.png", type: "image/svg+xml" }],
+    apple: [{ url: "/icons/apple-touch-icon.png", type: "image/png" }],
   },
   ...createMetadata({
     description:
