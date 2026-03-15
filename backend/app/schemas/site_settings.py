@@ -22,6 +22,7 @@ class TimelineItem(BaseModel):
     title: str
     description: str
     type: str  # "학업" | "경력" | "프로젝트" | "대외활동" | "수상"
+    award_image: Optional[str] = None
 
 
 class SiteSettingsOut(BaseModel):

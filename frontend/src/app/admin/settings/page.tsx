@@ -16,7 +16,7 @@ interface TechItem {
   category: string; proficiency: number; duration: string;
 }
 interface TimelineItem {
-  year: string; title: string; description: string; type: string;
+  year: string; title: string; description: string; type: string; award_image?: string;
 }
 
 type SettingsTab = "links" | "tech" | "history";
@@ -66,6 +66,15 @@ function move<T>(arr: T[], i: number, dir: -1 | 1): T[] {
   const next = [...arr];
   [next[i], next[j]] = [next[j], next[i]];
   return next;
+}
+
+function readFileAsDataUrl(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(String(reader.result));
+    reader.onerror = () => reject(new Error("이미지 파일을 읽는 중 오류가 발생했습니다."));
+    reader.readAsDataURL(file);
+  });
 }
 
 function SaveBtn({ onClick, saving, saved }: { onClick: () => void; saving: boolean; saved: boolean }) {
@@ -169,7 +178,7 @@ export default function SettingsPage() {
   // ── Timeline handlers ──
 
   const addTimeline = () =>
-    setTimeline([...timeline, { year: "", title: "", description: "", type: activeHistoryType }]);
+    setTimeline([...timeline, { year: "", title: "", description: "", type: activeHistoryType, award_image: "" }]);
   const removeTimeline = (i: number) => setTimeline(timeline.filter((_, idx) => idx !== i));
   const updateTimeline = <K extends keyof TimelineItem>(i: number, field: K, value: TimelineItem[K]) =>
     setTimeline(timeline.map((t, idx) => (idx === i ? { ...t, [field]: value } : t)));
@@ -201,6 +210,21 @@ export default function SettingsPage() {
       setTimeout(() => setSavedTimeline(false), 2000);
     } finally {
       setSavingTimeline(false);
+    }
+  };
+
+  const uploadTimelineAwardImage = async (i: number, file: File | null) => {
+    if (!file) {
+      updateTimeline(i, "award_image", "");
+      return;
+    }
+    if (!file.type.startsWith("image/")) return;
+
+    try {
+      const imageDataUrl = await readFileAsDataUrl(file);
+      updateTimeline(i, "award_image", imageDataUrl);
+    } catch {
+      // Ignore file read errors to avoid breaking the settings page.
     }
   };
 
@@ -517,7 +541,7 @@ export default function SettingsPage() {
               </div>
 
               {/* Row 2: description */}
-              <div className="pl-[1.75rem]">
+              <div className="pl-[1.75rem] space-y-3">
                 <textarea
                   value={item.description}
                   onChange={(e) => updateTimeline(i, "description", e.target.value)}
@@ -525,6 +549,33 @@ export default function SettingsPage() {
                   rows={2}
                   className="w-full bg-midnight-950 border border-midnight-700/60 text-silver-200 font-mono text-xs px-3 py-2 rounded-lg focus:outline-none focus:border-moon-glow/40 resize-none"
                 />
+
+                <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+                  <label className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-midnight-700/60 bg-midnight-950 text-silver-300 font-mono text-xs cursor-pointer hover:border-moon-glow/35 transition-colors w-fit">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      className="hidden"
+                      onChange={(e) => uploadTimelineAwardImage(i, e.target.files?.[0] ?? null)}
+                    />
+                    상장 이미지 첨부
+                  </label>
+
+                  {item.award_image ? (
+                    <>
+                      <span className="font-mono text-[11px] text-emerald-400">이미지 첨부됨</span>
+                      <button
+                        type="button"
+                        onClick={() => updateTimeline(i, "award_image", "")}
+                        className="font-mono text-[11px] text-red-400/80 hover:text-red-300 transition-colors w-fit"
+                      >
+                        첨부 삭제
+                      </button>
+                    </>
+                  ) : (
+                    <span className="font-mono text-[11px] text-silver-500">수상 항목 클릭 시 팝업으로 표시됩니다</span>
+                  )}
+                </div>
               </div>
             </div>
           ))}

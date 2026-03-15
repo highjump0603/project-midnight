@@ -110,6 +110,7 @@ export interface TimelineItem {
   title: string;
   description: string;
   type: string;
+  award_image?: string | null;
 }
 
 export interface SiteSettings {

@@ -2,7 +2,8 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { User } from "lucide-react";
+import Image from "next/image";
+import { User, X } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import TechIcon from "@/components/ui/TechIcon";
 import type { TechItem, TimelineItem } from "@/lib/api";
@@ -80,6 +81,7 @@ function TechCard({ item, index }: { item: TechItem; index: number }) {
 export default function MidnightAboutPage() {
   const [techItems, setTechItems] = useState<TechItem[]>([]);
   const [timelineItems, setTimelineItems] = useState<TimelineItem[]>([]);
+  const [selectedAwardImage, setSelectedAwardImage] = useState<{ title: string; image: string } | null>(null);
 
   useEffect(() => {
     const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL ?? "/api";
@@ -91,6 +93,18 @@ export default function MidnightAboutPage() {
       })
       .catch(() => {});
   }, []);
+
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setSelectedAwardImage(null);
+    };
+
+    if (selectedAwardImage) {
+      window.addEventListener("keydown", onKeyDown);
+    }
+
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [selectedAwardImage]);
 
   // Group tech items by category (preserve insertion order)
   const categories = Array.from(new Set(techItems.map((t) => t.category)));
@@ -157,8 +171,16 @@ export default function MidnightAboutPage() {
                           transition={{ delay: 0.32 + i * 0.05, duration: 0.4 }}
                           className="relative"
                         >
+                          {Boolean(item.award_image) && (
+                            <button
+                              type="button"
+                              onClick={() => setSelectedAwardImage({ title: item.title, image: item.award_image ?? "" })}
+                              className="absolute inset-0 z-10 rounded-xl"
+                              aria-label={`${item.title} 상장 이미지 보기`}
+                            />
+                          )}
                           <div className="absolute -left-[1.45rem] top-2 w-2.5 h-2.5 rounded-full bg-moon-glow/70 border-2 border-midnight-950 shadow-[0_0_8px_rgba(123,123,255,0.5)]" />
-                          <div className="bg-glass rounded-xl p-5 border border-midnight-600/40 hover:border-moon-glow/25 transition-colors">
+                          <div className={`bg-glass rounded-xl p-5 border border-midnight-600/40 transition-colors ${item.award_image ? "hover:border-moon-glow/45 cursor-zoom-in" : "hover:border-moon-glow/25"}`}>
                             <div className="flex items-center gap-2 mb-2">
                               <span className="font-mono text-xs px-2 py-0.5 rounded-full border border-moon-glow/20 bg-moon-glow/10 text-moon-glow">
                                 {item.year}
@@ -166,6 +188,9 @@ export default function MidnightAboutPage() {
                             </div>
                             <h4 className="font-display font-semibold text-silver-50 mb-1">{item.title}</h4>
                             <p className="text-silver-300 text-sm leading-relaxed">{item.description}</p>
+                            {item.award_image && (
+                              <p className="text-[11px] text-moon-glow/80 font-mono mt-2">클릭해서 상장 이미지 보기</p>
+                            )}
                           </div>
                         </motion.div>
                       ))}
@@ -200,6 +225,41 @@ export default function MidnightAboutPage() {
               })}
             </div>
           </motion.section>
+        )}
+
+        {selectedAwardImage && (
+          <div
+            className="fixed inset-0 z-50 bg-midnight-950/85 backdrop-blur-sm px-4 py-8 flex items-center justify-center"
+            onClick={() => setSelectedAwardImage(null)}
+          >
+            <div
+              className="relative w-full max-w-3xl rounded-2xl border border-midnight-700 bg-midnight-900/95 p-4 sm:p-5"
+              onClick={(event) => event.stopPropagation()}
+            >
+              <button
+                type="button"
+                onClick={() => setSelectedAwardImage(null)}
+                className="absolute right-3 top-3 p-1.5 rounded-lg text-silver-400 hover:text-silver-100 hover:bg-midnight-800/80 transition-colors"
+                aria-label="팝업 닫기"
+              >
+                <X size={18} />
+              </button>
+
+              <p className="font-display text-base sm:text-lg text-silver-100 pr-10 mb-4">
+                {selectedAwardImage.title}
+              </p>
+
+              <div className="relative h-[55vh] sm:h-[65vh] w-full rounded-xl overflow-hidden border border-midnight-700/80 bg-midnight-950">
+                <Image
+                  src={selectedAwardImage.image}
+                  alt={`${selectedAwardImage.title} 상장 이미지`}
+                  fill
+                  unoptimized
+                  className="object-contain"
+                />
+              </div>
+            </div>
+          </div>
         )}
 
       </div>
